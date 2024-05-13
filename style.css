@@ -1,0 +1,1049 @@
+@font-face {
+  font-family: "Josephin";
+  src: local("Josephin"), url("JosephinSans-Regular.ttf") format("opentype"),
+    url("JosephinSans-SemiBold.ttf") format("opentype");
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --transparentBlue: #ecf4f4;
+  --veryLightBlue: #51a7a9;
+  --lightBlue: #448c8d;
+  --darkBlue: #326667;
+  --text: #0d1b1b;
+}
+body {
+  font-family: Lato;
+  min-height: 100vh;
+  max-width: 1920px;
+  margin-inline: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Josephin";
+}
+h1 {
+  font-size: 72px;
+  line-height: 80px;
+  color: var(--lightBlue);
+  font-weight: 400;
+  margin-top: 56px;
+  margin-bottom: 48px;
+}
+h2 {
+  font-size: 48px;
+  color: var(--darkBlue);
+  text-align: center;
+  margin-bottom: 64px;
+}
+h3 {
+  font-size: 24px;
+  color: var(--lightBlue);
+  font-weight: 400;
+}
+h4 {
+  font-style: italic;
+  color: var(--darkBlue);
+  font-weight: 200;
+}
+h2 > span {
+  color: var(--veryLightBlue);
+}
+p {
+  color: var(--text);
+  margin-top: 16px;
+  line-height: 25px;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+section {
+  margin-bottom: 180px;
+  width: 100%;
+}
+.btn {
+  background-color: var(--lightBlue);
+  display: inline-block;
+  padding: 16px 32px;
+  border-radius: 8px;
+  margin: 32px 0;
+  border: 0;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-family: Lato;
+  font-size: 16px;
+}
+.btn a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn p {
+  margin: 0;
+  color: white;
+  font-weight: bold;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.input-form-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 32px;
+}
+.input-form-container input,
+.input-form-container #description,
+.input-form-container #categories {
+  margin-top: 8px;
+  height: 20px;
+  width: 100%;
+  font-size: 16px;
+  font-family: Lato, "sans-serif";
+}
+.input-form-container #categories:focus {
+  cursor: pointer;
+}
+.input-form-container label {
+  position: absolute;
+  transition: 0.5s ease;
+  top: -8px;
+  color: #1f4141;
+  font-weight: bold;
+}
+.input-form-container input:focus ~ label,
+.input-form-container #description:focus ~ label,
+.input-form-container #categories:focus ~ label {
+  transform: translateY(-8px);
+  font-size: 14px;
+  color: #448c8d;
+  font-weight: bold;
+}
+.form-inscription input:not(input[type="submit"]),
+.form-connexion input:not(input[type="submit"]),
+.form-account-modify input:not(input[type="submit"]),
+.form_admin_create_article input:not(input[type="submit"]),
+.form_admin_create_user input:not(input[type="submit"]),
+.form_admin_create_article #categories,
+.form_admin_create_article #description,
+.form_admin_update_article input:not(input[type="submit"]),
+.form_admin_update_article #categories {
+  appearance: none;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #448c8d;
+  outline: none;
+  margin-bottom: 0;
+}
+/**************header*********************/
+header {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 64px;
+}
+.menu > div {
+  display: flex;
+  gap: 4rem;
+}
+.menu a {
+  color: var(--lightBlue);
+  font-weight: bold;
+  font-size: 18px;
+}
+.logo-header {
+  height: 60px;
+  object-fit: cover;
+}
+.sub-menu {
+  display: none;
+}
+.account:hover {
+  cursor: pointer;
+}
+.account:hover .sub-menu {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.icon-menu {
+  display: none;
+}
+/****************** Inscription ******************/
+.inscription {
+  background-image: url("./assets/img/mer-voilier.jpg");
+  background-size: cover;
+  margin-inline: auto;
+  background-position: 50% 65%;
+  height: calc(100vh - 81px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.inscription::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(68, 140, 141, 0.2);
+  z-index: 1;
+}
+.logo {
+  width: 200px;
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 32px;
+}
+.form-inscription {
+  background: rgba(247, 253, 253, 0.7);
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 16px 32px 16px 32px;
+  position: relative;
+  z-index: 2;
+}
+.form-inscription h1,
+.form-connexion h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 64px;
+  color: #448c8d;
+}
+.name-container {
+  display: flex;
+  gap: 32px;
+}
+.input-inscription-container > input {
+  width: 142px;
+}
+.form-inscription .submit,
+.form-connexion .submit,
+.submit-account {
+  display: block;
+  margin-inline: auto;
+  margin-top: 16px;
+  margin-bottom: 48px;
+  border: none;
+  background: #448c8d;
+  padding: 16px 32px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-family: Lato, "sans-serif";
+  font-size: 16px;
+}
+.form-inscription .submit:hover,
+.form-connexion .submit:hover {
+  background: #1f4141;
+  cursor: pointer;
+}
+.link-to-connexion,
+.link-to-inscription,
+.link-forgot-password {
+  display: block;
+  text-align: center;
+  color: #1f4141;
+  text-decoration: none;
+  font-weight: bold;
+}
+.inscription-error,
+.connexion-error {
+  margin-top: 8px;
+  color: rgb(165, 0, 0);
+  font-size: 14px;
+}
+/****************** Connexion******************/
+.connexion-container {
+  display: flex;
+  margin-inline: auto;
+  height: calc(100vh - 81px);
+}
+.img-container,
+.form-container {
+  width: 50%;
+}
+.img-container {
+  position: relative;
+}
+.img-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(68, 140, 141, 0.2);
+}
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.form-container {
+  background-color: rgba(68, 140, 141, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-connexion {
+  background-color: white;
+  width: 400px;
+  filter: drop-shadow(0px 4px 4px rgba(68, 140, 141, 0.5));
+  border-radius: 10px;
+  padding: 64px 32px 16px 32px;
+}
+.link-to-inscription {
+  margin-top: 8px;
+}
+/****************** HOME ******************/
+.banner {
+  width: 100%;
+  height: 400px;
+}
+.intro {
+  margin: 0 64px;
+}
+.intro h2 {
+  text-align: start;
+  margin-bottom: 0;
+}
+.intro p {
+  width: 80%;
+  container-name: intro_p;
+}
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-container {
+  width: fit-content;
+  margin-inline: auto;
+}
+.btn.btn-discover {
+  margin: 32px 64px;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 64px;
+  margin: 0 64px;
+}
+.gallery:first-of-type {
+  margin-bottom: 64px;
+}
+.gallery-card {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.gallery-card > img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+}
+.gallery-card.medium {
+  width: 600px;
+}
+.gallery-card.small {
+  width: 440px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px;
+}
+.gallery-card > p {
+  padding: 0 16px 16px 16px;
+}
+.description-container {
+  display: flex;
+}
+.description-container > div {
+  width: 50%;
+  height: 400px;
+}
+.description-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.description-content {
+  background: var(--transparentBlue);
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
+}
+.container-card-hotel,
+.container-card-villa {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+.card-hotel,
+.card-villa {
+  width: 394px;
+  height: 100%;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.card-hotel img,
+.card-villa img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.card-hotel p,
+.card-villa p {
+  padding: 0 16px 16px 16px;
+}
+.voyage {
+  display: flex;
+  gap: 180px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 64px;
+}
+.voyage div {
+  width: 50%;
+}
+.voyage img {
+  width: 300px;
+  height: 400px;
+}
+.voyage div:nth-child(2) {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+}
+.voyage img:nth-child(2) {
+  position: absolute;
+  left: 100px;
+  top: 80px;
+}
+.voyage img:first-child {
+  margin-bottom: 80px;
+}
+/****************** Blog ******************/
+.blog-menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 64px;
+  background-color: var(--transparentBlue);
+  margin: 64px 64px;
+  border-radius: 8px;
+  container-type: inline-size;
+  container-name: menu;
+}
+.blog-menu-container p {
+  margin: 0;
+  color: var(--darkBlue);
+}
+.blog-menu {
+  display: flex;
+  gap: 80px;
+  padding: 8px 32px;
+  background-color: white;
+  border-radius: 8px;
+}
+.blog-menu button {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  color: var(--darkBlue);
+  font-weight: bold;
+}
+@container menu (max-width:580px) {
+  .blog-menu {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+.blog-container {
+  container-type: inline-size;
+  container-name: card;
+  margin: 0 64px;
+}
+.blog-card {
+  display: flex;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 64px;
+}
+.blog-card .card-header {
+  padding: 16px 48px;
+}
+.blog-card .card-content {
+  padding: 0 64px;
+}
+.img-blog-container {
+  width: 400px;
+  height: 300px;
+  min-width: 300px;
+  min-height: 200px;
+}
+.img-blog-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-content p {
+  margin: 0;
+}
+@container card (max-width:830px) {
+  .blog-card {
+    flex-direction: column;
+  }
+  .img-blog-container {
+    width: 100%;
+  }
+  .blog-card .card-content {
+    padding: 0 64px 32px 64px;
+  }
+  .blog-card .btn-container {
+    margin-inline: auto;
+  }
+}
+@container card (max-width:580px) {
+  .img-blog-container {
+    width: 100%;
+    min-width: 0;
+  }
+  .blog-card .card-header {
+    padding: 16px 0;
+    margin: 0 32px;
+  }
+  .blog-card .card-content {
+    padding: 0 32px 32px 32px;
+  }
+  .blog-card .btn-container {
+    margin-inline: auto;
+  }
+}
+/****************** Article ******************/
+.section-article-container,
+.section-carroussel-container,
+.section-comment-container {
+  margin: 0 64px 180px 64px;
+}
+.section-article-container h1,
+.section-article-container h2,
+.section-article-container span {
+  color: var(--darkBlue);
+}
+.section-article-container h1 {
+  margin-bottom: 16px;
+}
+.section-article-container span {
+  font-style: italic;
+}
+.section-article-container h2 {
+  text-align: start;
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+.wrapper-carroussel {
+  position: relative;
+}
+.carroussel {
+  width: 97%;
+  height: 600px;
+  margin-inline: auto;
+}
+.carroussel li {
+  height: 100%;
+  width: 100%;
+}
+.carroussel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.btn-left,
+.btn-right {
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--transparentBlue);
+  position: absolute;
+}
+.btn-left {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.btn-right {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.section-comment-container div:first-of-type {
+  display: flex;
+  justify-content: center;
+}
+.section-comment-container form {
+  display: inline-block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+}
+.textarea-comment {
+  resize: none;
+  max-width: 800px;
+  width: 100%;
+  height: 100px;
+  border: none;
+  border-bottom: solid 1px var(--darkBlue);
+  font-family: Lato;
+  appearance: none;
+  font-size: 16px;
+  padding: 8px 120px 8px 8px;
+  overflow: auto;
+}
+.textarea-comment::-webkit-scrollbar {
+  display: none;
+}
+.textarea-comment:focus {
+  outline: none;
+}
+.section-comment-container form .btn {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  margin: 0;
+  border: none;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.section-comment-container form label {
+  position: absolute;
+  transition: 0.5s ease;
+  top: 64px;
+  color: #1f4141;
+  font-weight: bold;
+}
+.section-comment-container form textarea:focus ~ label {
+  font-size: 14px;
+  color: #448c8d;
+  font-weight: bold;
+}
+.display__user-comment-container {
+  background-color: var(--transparentBlue);
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+}
+.img-user-container {
+  width: 200px;
+  min-width: 200px;
+  height: 200px;
+  min-height: 200px;
+}
+.img-user-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-comment-card {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+}
+/****************** Espace client ******************/
+.section-account-container,
+.section-account-modify {
+  background: var(--transparentBlue);
+  margin: 64px;
+  padding: 64px;
+}
+.section-account-container h1 {
+  margin: 0 0 64px 0;
+  text-align: center;
+}
+.account-content,
+.account-modify {
+  background: white;
+  max-width: 600px;
+  width: 100%;
+  min-width: 300px;
+  margin-inline: auto;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px 0px rgba(81, 167, 169, 0.25);
+}
+.img-account-container {
+  width: 200px;
+  height: 200px;
+  margin-inline: auto;
+  margin-bottom: 64px;
+}
+.img-account-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: solid 4px var(--lightBlue);
+}
+.account-content > div {
+  display: flex;
+  gap: 8px;
+}
+.account-content button {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  border: 0;
+  margin: 64px auto 0 auto;
+}
+/* Modifier mes infos */
+input[type="file"] {
+  display: none;
+}
+.account-modify h2 {
+  margin-bottom: 32px;
+}
+.btn-file {
+  background: white;
+  color: var(--darkBlue);
+  border: 1px solid var(--darkBlue);
+  margin: 0 0 48px 0;
+}
+/****************** Menu admin ******************/
+.admin_menu {
+  background: var(--lightBlue);
+  width: 250px;
+  text-align: center;
+}
+.admin_menu li {
+  margin: 32px 0;
+}
+.admin_menu li:first-of-type {
+  margin: 64px 0 32px 0;
+}
+.admin_menu a {
+  color: white;
+}
+/****************** Général admin ******************/
+.container_table {
+  width: 100%;
+}
+table {
+  width: 96.2%;
+  margin: 64px 32px;
+  display: table;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+thead {
+  outline: 1px solid var(--lightBlue);
+  background-color: var(--transparentBlue);
+}
+table thead th {
+  padding: 32px 0;
+}
+table tbody td,
+table tbody th {
+  text-align: center;
+  padding: 8px;
+}
+.large_width {
+  width: 50%;
+}
+table tbody tr:nth-child(even) {
+  background: var(--transparentBlue);
+}
+table tbody tr:nth-child(odd) {
+  background: white;
+}
+.icons_container button {
+  background-color: transparent;
+  border: 0;
+}
+.icons_container button:hover {
+  cursor: pointer;
+}
+.create_container {
+  text-align: end;
+  margin-right: 32px;
+}
+.create-btn {
+  margin: 0 0 64px 0;
+}
+/****************** Admin user ******************/
+/****************** Admin create user ******************/
+.form_admin_create_user .name-container > .input-form-container {
+  width: 50%;
+}
+/****************** Admin article ******************/
+/****************** Admin create article ******************/
+.section_admin_users,
+.section_admin_create_user,
+.section_admin_articles,
+.section_admin_create_article,
+.section_admin_comments,
+.section_admin_update_article {
+  margin-bottom: 0;
+  display: flex;
+}
+.admin_create_article,
+.admin_create_user,
+.admin_update_article {
+  margin: 64px auto;
+  background: white;
+  max-width: 600px;
+  width: 100%;
+  min-width: 300px;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px 0px rgba(81, 167, 169, 0.25);
+}
+.input-form-container #description {
+  margin-top: 16px;
+  height: 60px;
+  border: 1px solid var(--darkBlue);
+  padding: 8px;
+}
+/****************** Admin comments ******************/
+
+/****************** footer ******************/
+footer div:first-of-type {
+  padding: 0 64px;
+}
+footer img {
+  height: 135px;
+  object-fit: cover;
+}
+footer {
+  display: flex;
+}
+footer div:nth-child(2) {
+  background: var(--transparentBlue);
+  width: 100%;
+}
+footer p {
+  text-align: center;
+  /* height: 200px; */
+}
+/****************** Media query ******************/
+@media screen and (max-width: 1250px) {
+  .gallery {
+    gap: 28px;
+  }
+  .gallery-card.medium {
+    width: 500px;
+  }
+  .gallery-card.small {
+    width: 340px;
+  }
+  .gallery:first-of-type {
+    margin-bottom: 28px;
+  }
+  .voyage {
+    gap: 64px;
+  }
+  .carroussel {
+    height: 450px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .gallery {
+    margin: 0 32px;
+  }
+  .gallery-card img {
+    height: 250px;
+  }
+  .gallery-card.medium {
+    width: 450px;
+    height: 480px;
+  }
+  .gallery-card.small {
+    width: 260px;
+    height: 480px;
+  }
+  .gallery:first-of-type {
+    margin-bottom: 28px;
+  }
+  .btn.btn-discover {
+    margin: 32px;
+  }
+  .voyage {
+    gap: 32px;
+  }
+  .voyage div img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+  }
+  .section-account-container {
+    margin: 0;
+  }
+}
+@media screen and (max-width: 850px) {
+  .menu > div {
+    gap: 48px;
+  }
+  .gallery {
+    flex-wrap: wrap;
+  }
+  .gallery-card.small,
+  .gallery-card.medium {
+    width: 600px;
+    height: auto;
+  }
+  .gallery-container {
+    width: 100%;
+    height: auto;
+  }
+  .btn-container {
+    text-align: center;
+  }
+  .user-comment-card {
+    flex-direction: column;
+  }
+  .intro p {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .menu {
+    padding: 8px 32px;
+  }
+  .intro {
+    margin: 0 32px;
+  }
+  .menu-items li {
+    display: none;
+  }
+  .icon-menu {
+    display: flex;
+  }
+  h1 {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  .description-container,
+  .voyage {
+    flex-direction: column;
+    /* margin: 0 32px; */
+  }
+  .description-container > div {
+    width: 100%;
+    height: 250px;
+  }
+  .voyage div {
+    width: 100%;
+  }
+  .voyage div img:first-of-type {
+    margin-bottom: 64px;
+  }
+  .main-article-container {
+    margin: 0 32px;
+  }
+  .display__user-comment-container {
+    padding: 32px;
+  }
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+  footer div:nth-child(2) {
+    height: 135px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .gallery {
+    margin: 0;
+  }
+  .gallery-card.small,
+  .gallery-card.medium {
+    width: 100%;
+  }
+  .blog-menu-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .blog-container {
+    margin: 0;
+  }
+  .blog-card .card-header {
+    flex-direction: column;
+  }
+  .section-article-container,
+  .section-comment-container {
+    margin: 0 32px 180px 32px;
+  }
+  .section-carroussel-container {
+    margin: 0 0 180px 0;
+  }
+  .carroussel {
+    width: 100%;
+  }
+  .section-comment-container form .btn {
+    margin: 32px 0;
+    margin-inline: auto;
+    width: fit-content;
+    position: static;
+  }
+  .section-account-container {
+    padding: 32px;
+  }
+  .img-account-container {
+    width: 140px;
+    height: 140px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .intro,
+  .intro h2 {
+    text-align: center;
+  }
+  .description-content {
+    padding: 0 32px;
+  }
+  .img-user-container {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    min-height: 100px;
+  }
+  .form-inscription {
+    padding: 16px 16px;
+    min-width: 280px;
+    margin: 0 16px;
+  }
+  .form-inscription h1 {
+    margin-top: 32px;
+    font-size: 32px;
+  }
+  .name-container {
+    gap: 8px;
+  }
+}
