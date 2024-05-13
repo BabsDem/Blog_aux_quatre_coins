@@ -7,7 +7,7 @@
 
     <div class="admin_create_user">
 
-        <form action="/blog/controllers/userController.php" method="post" class="form_admin_create_user">   
+        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form_admin_create_user">   
           <h2>Créer un utilisateur</h2>
           <div class="name-container">
             <div class="input-form-container">

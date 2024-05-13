@@ -6,7 +6,7 @@
     </div>
 
     <div class="admin_create_article">
-        <form action="/blog/controllers/articleController.php" method="post" class="form_admin_create_article" enctype="multipart/form-data">
+        <form action="/blog_aux_quatre_coins/controllers/articleController.php" method="post" class="form_admin_create_article" enctype="multipart/form-data">
                 <h2>Créer un nouvel article</h2>
                 <div class="input-form-container">
                     <input type="text" id="title" required autofocus autocomplete="off" name="title"/>

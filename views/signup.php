@@ -14,7 +14,7 @@
 
 <main class="inscription">
       <div>
-        <form action="/blog/controllers/userController.php" method="post" class="form-inscription">      
+        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-inscription">      
           <h1>Inscrivez vous !</h1>
           <div class="name-container">
             <div class="input-form-container">

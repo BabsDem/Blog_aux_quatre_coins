@@ -5,6 +5,9 @@
         session_destroy();
         header("Location: signin.php");
     } 
+    if(isset($_GET["page"]) && $_GET['page']=="admin_users"){
+        $users = $_SESSION['users']; 
+    }
 
 ?>
     <section class="section_admin_users">
@@ -23,11 +26,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($users as $user): ?>
                     <tr>
-                        <td>2</td>
-                        <td>Dupont</td>
-                        <td>Marie</td>
-                        <td>dupontmarie@hotmail.com</td>
+                        <td><?php echo $user["id_user"] ?></td>
+                        <td><?php echo $user["lastname"] ?></td>
+                        <td><?php echo $user["firstname"] ?></td>
+                        <td><?php echo $user["email"] ?></td>
                         <td>
 
                             <div class="icons_container">
@@ -40,10 +44,10 @@
                                 </div>
                         </td>
                     </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
             <div class="create_container">
-
                 <a class="btn create-btn" href="admin_create_user.php">Créer un utilisateur</a>
             </div>
         </div>

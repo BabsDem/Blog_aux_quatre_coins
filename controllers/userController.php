@@ -117,3 +117,9 @@ if(isset($_POST['submit_inscription'])){
 
     }
 }
+
+if(isset($_GET['page']) && $_GET['page'] === "admin_users"){
+    $_SESSION['users'] = getAllUser();
+    header("Location: ../views/admin_users.php?page=admin_users"); 
+    exit;
+}

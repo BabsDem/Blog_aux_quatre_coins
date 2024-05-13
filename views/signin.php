@@ -16,7 +16,7 @@ if(isset($_SESSION['errors'])){
       </div>
       <main class="form-container">
         <div>
-          <form action="/blog/controllers/userController.php" method="post" class="form-connexion">
+          <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-connexion">
             <h1>Connectez vous !</h1>
             <div class="input-form-container">
               <input type="email" required id="email" autofocus autocomplete="off" name="email"/>

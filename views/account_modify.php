@@ -22,7 +22,7 @@ if(isset($_GET['message'])){
         <h2>Modifier mes informations</h2>
         <a href="account_modify_password.php" class="btn account-btn">Modifier mon mot de passe</a>
 
-        <form action="/blog/controllers/userController.php" method="post" class="form-account-modify" enctype="multipart/form-data">
+        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-account-modify" enctype="multipart/form-data">
             <div class="input-account-container">
                <!-- id communique avec for du label ce qui le rend fonctionnel -->
                 <input type="file" id="profile_img" name="profile_img">

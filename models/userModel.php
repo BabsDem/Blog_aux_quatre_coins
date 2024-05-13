@@ -55,6 +55,14 @@ function getUser($email){
     return $user;
 }
 
+function getAllUser(){
+    global $bdd;
+    $req = $bdd->prepare("SELECT * FROM users"); 
+    $req->execute();
+    $users =$req->fetchAll();
+    return $users;
+}
+
 function updateUser($id, $lastname, $firstname, $email, $img){
     global $bdd;
     $req = $bdd->prepare("UPDATE users SET lastname= :lastname, firstname= :firstname, email= :email, img= :img WHERE id_user = :id");

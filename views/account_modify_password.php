@@ -13,7 +13,7 @@ if(isset($_GET['message'])){
 
 <section class="section-account-modify ">    
     <div class="account-modify">
-        <form action="/blog/controllers/userController.php" method="post" class="form-account-modify">
+        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-account-modify">
             <h2>Modifier mon mot de passe !</h2>
             <div class="input-form-container">
                 <input type="password" required id="email" autofocus autocomplete="off" name="old_password"/>

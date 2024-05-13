@@ -5,10 +5,6 @@ require ("../models/articleModel.php");
 if(isset($_GET["page"]) && $_GET['page']=="admin_articles"){
     $articles = $_SESSION['articles']; 
 }
-// if(isset($_GET["article"]) && $_GET['article']=="admin_articles"){
-//     $articles = $_SESSION['articles']; 
-// }
-
 ?>
 
 <section class="section_admin_articles">
@@ -39,7 +35,7 @@ if(isset($_GET["page"]) && $_GET['page']=="admin_articles"){
                         <td><?php echo $article["category"] ?></td>
                         <td>
                             <div class="icons_container">
-                                <a href="admin_update_article.php">
+                                <a href="admin_update_article.php?article_id=<?php echo $article['id_article']; ?>">
                                     <img src="../assets/svg/pen-solid.svg" alt="bouton modifier article">
                                 </a>
                                 <a href="../controllers/articleController.php?article_id=<?php echo $article['id_article']; ?>">
@@ -52,7 +48,9 @@ if(isset($_GET["page"]) && $_GET['page']=="admin_articles"){
                 </tbody>
             </table>
             <div class="create_container">
+
                 <a class="btn create-btn" href="admin_create_article.php">Créer un article</a>
+
             </div>
         </div>
 </section>
