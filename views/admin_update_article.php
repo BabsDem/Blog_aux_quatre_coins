@@ -2,6 +2,11 @@
 if(isset($_GET['article_id'])){
   $articleId = $_GET['article_id'];
 }
+if(isset($_SESSION["errors"])){
+    $errors = $_SESSION["errors"];
+    unset($_SESSION['errors']);   
+
+}
 ?>
 <section class="section_admin_update_article">
     <div class="admin_menu">
@@ -10,7 +15,7 @@ if(isset($_GET['article_id'])){
 
     <div class="admin_update_article">
         <form action="/blog_aux_quatre_coins/controllers/articleController.php" method="post" class="form_admin_update_article" enctype="multipart/form-data">
-                <h2>Modifier l'article</h2>
+            <h2>Modifier l'article</h2>
                 <input type="hidden" name="update_article_id" value="<?php echo $articleId; ?>">
                 <div class="input-form-container">
                     <input type="text" id="title" required autofocus autocomplete="off" name="title"/>
@@ -49,6 +54,8 @@ if(isset($_GET['article_id'])){
                 <div>
                     <input type="file" id="images" name="images[]" multiple>
                     <label for="images" class="btn btn-file">Choisir des images</label>
+                    <span><?php echo $errors ?? "" ; ?></span>
+
                 </div>
              
                 <input type="submit" name="submit_admin_update_article" value="Modifier" class="btn submit-account"/>

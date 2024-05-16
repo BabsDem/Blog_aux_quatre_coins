@@ -41,7 +41,9 @@
             id_comment int AUTO_INCREMENT PRIMARY KEY,
         description TEXT NOT NULL, 
         date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+        id_user INT NOT NULL,
         id_article INT NOT NULL, 
+        FOREIGN KEY (id_user) REFERENCES users(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (id_article) REFERENCES articles(id_article) ON DELETE CASCADE ON UPDATE CASCADE
         )
         ");

@@ -1,6 +1,6 @@
 <?php 
 
-    include "db.php"; 
+    require "db.php"; 
 
     function createArticle($title, $subtitle, $place, $description, $category){
         global $bdd; 
@@ -26,7 +26,14 @@
             $req3->bindParam(":id_img", $imgId);
             $req3->execute();
     }
-
+function getArticle($id){
+    global $bdd;
+    $req = $bdd->prepare("SELECT * FROM articles WHERE id_article = :id"); 
+    $req->bindParam(":id", $id); 
+    $req->execute(); 
+    $article = $req->fetch();
+    return $article;
+}
     function getAllArticle(){
         global $bdd;
         $req = $bdd->prepare('SELECT * FROM articles');

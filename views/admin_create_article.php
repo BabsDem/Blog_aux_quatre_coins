@@ -1,4 +1,6 @@
-<?php include "components/header.php";?>
+<?php 
+include "components/header.php";
+?>
 
 <section class="section_admin_create_article">
     <div class="admin_menu">

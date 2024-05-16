@@ -24,7 +24,7 @@ function addUser(string $lastname, string $firstname, string $email, string $pas
         // DIR pour dossier
         // $pathImg = __DIR__ . "/public/" . $img; 
         $pathImg ="../public/profile/" . $img; 
-        $req->bindParam(":img", $pathImg ); 
+        $req->bindParam(":img", $pathImg); 
         $req->execute();  
     // Sinon on ajoute une exception      
     }else{
@@ -55,6 +55,16 @@ function getUser($email){
     return $user;
 }
 
+function getUserForUpdate($id){
+    global $bdd; 
+    $req = $bdd->prepare("SELECT * FROM users WHERE id_user = :id"); 
+    $req->bindParam(":id", $id);  
+    $req->execute(); 
+    $user = $req->fetch();         
+    return $user;
+}
+
+
 function getAllUser(){
     global $bdd;
     $req = $bdd->prepare("SELECT * FROM users"); 
@@ -83,11 +93,9 @@ function updateUserPassword($id, $password){
     $req->execute(); 
 }
 
-// function updateUserImg($id, $img, $email){
-//     global $bdd;
-//     $req = $bdd->prepare("UPDATE users SET  img = :img WHERE id_user = :id");
-//     $req->bindParam(":img",$img);
-//     $req->bindParam(":id",$id);
-//     $req->execute();
-//     return getUser($email); 
-// }
+function deleteUser($id){
+    global $bdd;
+    $req= $bdd->prepare("DELETE FROM users WHERE id_user= :id"); 
+    $req->bindParam(":id", $id); 
+    $req->execute(); 
+}

@@ -1,22 +1,28 @@
 <?php 
   include "components/header.php";
+  if(isset($_GET['user_id'])){
+    $userId = $_GET['user_id'];
+    var_dump($userId);
+  }
   if(isset($_SESSION['errors'])){
     $errors = $_SESSION['errors']; 
     var_dump($errors);
-    unset($_SESSION['errors']);            
-
+    unset($_SESSION['errors']);   
   }
+
+
+
 ?>
 
-<section class="section_admin_create_user">
+<section class="section_admin_update_user">
     <div class="admin_menu">
         <?php include "components/menu_admin.php";?>
     </div>
 
-    <div class="admin_create_user">
-
-        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form_admin_create_user">   
-          <h2>Créer un utilisateur</h2>
+    <div class="admin_update_user">
+        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form_admin_update_user">   
+          <h2>Modifier les données de l'utilisateur</h2>
+          <input type="hidden" name="update_user_id" value="<?php echo $userId; ?>">
           <div class="name-container">
             <div class="input-form-container">
               <input
@@ -57,7 +63,7 @@
             <span class="inscription-error"><?php echo $errors['confirm_password'] ?? "";?> </span>
           </div>
           <div>
-          <input type="submit" name="submit_admin_create_user" value="Créer" class="btn submit-account" />         
+          <input type="submit" name="submit_admin_update_user" value="Créer" class="btn submit-account" />         
         </form>
         </div>
 </section>

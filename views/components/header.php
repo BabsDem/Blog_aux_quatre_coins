@@ -27,7 +27,7 @@ if(isset($_SESSION['user'])){
         </div>
         <div class="menu-items">  
         <li><a href="home.php">Accueil</a></li>
-        <li><a href="blog.php">Blog</a></li>   
+        <li><a href="../controllers/articleController.php?page=blog">Blog</a></li>   
 
         <?php if(isset($user)):?>
           <?php if($_SESSION['user']['role'] == 0) : ?>

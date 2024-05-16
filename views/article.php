@@ -1,4 +1,25 @@
-<?php include "components/header.php"; ?>
+<?php 
+    include "components/header.php"; 
+
+    if(isset($_GET["page"]) && $_GET['page'] == "display_article"){
+        $article = $_SESSION['article']; 
+        // if(isset($_SESSION["comments"])){
+        //     $comments = $_SESSION["comments"]; 
+        //     var_dump($comments); 
+        // }
+    }
+    if(isset($_GET['message'])){
+        $message = $_GET["message"];
+    }    
+    if(isset($_SESSION['user'])){
+        $user = $_SESSION['user'];
+    }
+    if(isset($_SESSION["com"])){
+        $comments = $_SESSION["com"]; 
+        var_dump($comments); 
+    }
+    var_dump($_SESSION);
+?>
 
 <div class="banner">
     <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">
@@ -40,11 +61,19 @@
 
     <section class="section-comment-container">
         <div>        
-            <form action="" method="post">
+            <?php if(isset($user)): ?>
+            <form action="/blog_aux_quatre_coins/controllers/commentController.php" method="post">
+                <?php echo $user["id_user"]; ?>
+            <span><?php echo $message ?? ""; ?></span>                
+            <input type="hidden" name="id_user" value="<?php echo $user['id_user'];?>">
+            <input type="hidden" name="id_article" value="<?php echo $article["id_article"];?>">
                 <textarea name="user_comment" class="textarea-comment"></textarea>   
                 <label class="label-textarea">Laissez un commentaire !</label>
                 <input type="submit" name="submit_comment" value="Poster" class="btn">
             </form>
+            <?php else : ?>
+                <p>Si vous souhaitez laisser un commentaire, <a class="btn" href="signin.php">Inscrivez vous</a> ou <a class="btn" href="signup.php">Connectez vous </a></p>
+            <?php endif ?>
         </div>
     </section>
 

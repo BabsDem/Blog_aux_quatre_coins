@@ -1,10 +1,16 @@
 <?php 
-include "components/header.php";
-require ("../models/articleModel.php"); 
+    include "components/header.php";
+    
+    require ("../models/articleModel.php"); 
 
-if(isset($_GET["page"]) && $_GET['page']=="admin_articles"){
-    $articles = $_SESSION['articles']; 
-}
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 1 ){
+        session_destroy();
+        header("Location: signin.php");
+        } 
+
+    if(isset($_GET["page"]) && $_GET['page'] == "admin_articles"){
+        $articles = $_SESSION['articles']; 
+    }
 ?>
 
 <section class="section_admin_articles">

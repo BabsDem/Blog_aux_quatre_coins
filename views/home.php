@@ -2,11 +2,8 @@
 include "components/header.php"; 
 if(isset($_SESSION['articles'])){
     $articles = $_SESSION['articles']; 
-    var_dump($articles);
 }
-
 ?>
-
 <section>
     <div class="banner">
         <img src="../assets/img/banner_beach.png" alt="Plage sable fin">

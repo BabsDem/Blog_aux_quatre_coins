@@ -5,7 +5,7 @@
         session_destroy();
         header("Location: signin.php");
     } 
-    if(isset($_GET["page"]) && $_GET['page']=="admin_users"){
+    if(isset($_GET["page"]) && $_GET['page'] == "admin_users"){
         $users = $_SESSION['users']; 
     }
 
@@ -33,15 +33,14 @@
                         <td><?php echo $user["firstname"] ?></td>
                         <td><?php echo $user["email"] ?></td>
                         <td>
-
                             <div class="icons_container">
-                                    <a href="admin_update_article.php">
-                                        <img src="../assets/svg/pen-solid.svg" alt="bouton modifier article">
-                                    </a>
-                                    <button>
-                                        <img src="../assets/svg/trash-solid.svg" alt="bouton supprimer article">
-                                    </button>
-                                </div>
+                                <a href="admin_update_user.php?user_id=<?php echo $user['id_user']; ?>">
+                                    <img src="../assets/svg/pen-solid.svg" alt="bouton modifier utilisateur">
+                                </a>
+                                <a href="../controllers/userController.php?user_id=<?php echo $user['id_user']; ?>"> 
+                                    <img src="../assets/svg/trash-solid.svg" alt="bouton supprimer utilisateur">
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     <?php endforeach ?>

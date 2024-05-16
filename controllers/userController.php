@@ -18,7 +18,7 @@ if(isset($_POST['submit_inscription'])){
         if(empty( $_SESSION['errors'])){
             try{
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                addUser($lastname, $firstname, $email , $password);                   
+                addUser( $lastname, $firstname, $email , $password);
                 $_SESSION['user'] = getUser($email); 
             }catch(\Exception $e){
                 $_SESSION['errors']['email'] = $e->getMessage();
@@ -33,7 +33,7 @@ if(isset($_POST['submit_inscription'])){
         }
     }else{
         $message = "Merci de remplir tous les champs"; 
-        header("Location: ../views/signup?message=$message");
+        header("Location: ../views/signup.php?message=$message");
         exit;
     }
     
@@ -116,10 +116,75 @@ if(isset($_POST['submit_inscription'])){
         }
 
     }
+}else if(isset($_POST['submit_admin_create_user'])){
+    if(!empty($_POST['last_name']) && !empty($_POST['first_name']) &&  !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])){
+        $lastname = htmlspecialchars(trim(strtolower($_POST['last_name']))); 
+        $firstname = htmlspecialchars(trim(strtolower($_POST['first_name']))); 
+        $email = htmlspecialchars(trim(strtolower($_POST['email']))); 
+        $password = htmlspecialchars(trim($_POST['password']));
+        $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
+
+        $_SESSION['errors'] = validateSignup($lastname, $firstname, $email, $password, $confirm_password);
+
+        if(empty( $_SESSION['errors'])){
+            try{
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                addUser($lastname, $firstname, $email , $password);                   
+                $_SESSION['users'] = getAllUser(); 
+            }catch(\Exception $e){
+                $_SESSION['errors']['email'] = $e->getMessage();
+                header("Location: ../views/admin_create_user.php");
+                exit;
+            }
+            header("Location: ../views/admin_users.php?page=admin_users");
+            exit;
+        }else{
+            header("Location: ../views/admin_create_user.php");
+            exit;
+        }
+    }else{
+        $message = "Merci de remplir tous les champs"; 
+        header("Location: ../views/admin_users.php?message=$message");
+        exit;
+    }
+}else if(isset($_POST['submit_admin_update_user'])){
+    if(!empty($_POST['last_name']) && !empty($_POST['first_name']) &&  !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])){
+        $lastname = htmlspecialchars(trim(strtolower($_POST['last_name']))); 
+        $firstname = htmlspecialchars(trim(strtolower($_POST['first_name']))); 
+        $email = htmlspecialchars(trim(strtolower($_POST['email']))); 
+        $password = htmlspecialchars(trim($_POST['password']));
+        $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
+        $id = htmlspecialchars(trim($_POST["update_user_id"]));
+
+        $_SESSION['errors'] = validateSignup($lastname, $firstname, $email, $password, $confirm_password);
+        $user = getUserForUpdate($id);
+    
+        if(empty( $_SESSION['errors'])){
+            try{
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                updateUser($id, $lastname, $firstname, $email, $user["img"]); 
+                updateUserPassword($id, $password); 
+                $_SESSION['users'] = getAllUser();               
+                header("Location: ../views/admin_users.php?page=admin_users");
+                exit;
+            }catch(\Exception $e){
+                $_SESSION['errors']['email'] = $e->getMessage();
+            }
+        }else{
+            header("Location: ../views/admin_update_user.php?user_id=". $id);
+            exit;
+        }
+    }
 }
 
 if(isset($_GET['page']) && $_GET['page'] === "admin_users"){
     $_SESSION['users'] = getAllUser();
+    header("Location: ../views/admin_users.php?page=admin_users"); 
+    exit;
+}
+if(isset($_GET['user_id'])){
+    deleteUser($_GET['user_id']); 
+    $_SESSION["users"] = getAllUser(); 
     header("Location: ../views/admin_users.php?page=admin_users"); 
     exit;
 }

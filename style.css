@@ -135,6 +135,7 @@ section {
 .form-account-modify input:not(input[type="submit"]),
 .form_admin_create_article input:not(input[type="submit"]),
 .form_admin_create_user input:not(input[type="submit"]),
+.form_admin_update_user input:not(input[type="submit"]),
 .form_admin_create_article #categories,
 .form_admin_create_article #description,
 .form_admin_update_article input:not(input[type="submit"]),
@@ -422,14 +423,15 @@ header {
   margin: 0 64px;
 }
 .voyage div {
-  width: 50%;
+  width: 40%;
 }
 .voyage img {
-  width: 300px;
-  height: 400px;
+  width: 280px;
+  height: 340px;
 }
 .voyage div:nth-child(2) {
   position: relative;
+  right: 32px;
   display: flex;
   justify-content: center;
   width: fit-content;
@@ -796,23 +798,27 @@ table tbody tr:nth-child(odd) {
 }
 /****************** Admin user ******************/
 /****************** Admin create user ******************/
-.form_admin_create_user .name-container > .input-form-container {
+.form_admin_create_user .name-container > .input-form-container,
+.form_admin_update_user .name-container > .input-form-container {
   width: 50%;
 }
 /****************** Admin article ******************/
 /****************** Admin create article ******************/
 .section_admin_users,
 .section_admin_create_user,
+.section_admin_update_user,
 .section_admin_articles,
 .section_admin_create_article,
 .section_admin_comments,
 .section_admin_update_article {
   margin-bottom: 0;
   display: flex;
+  min-height: calc(100vh - 220px);
 }
 .admin_create_article,
 .admin_create_user,
-.admin_update_article {
+.admin_update_article,
+.admin_update_user {
   margin: 64px auto;
   background: white;
   max-width: 600px;
@@ -891,9 +897,6 @@ footer p {
   .btn.btn-discover {
     margin: 32px;
   }
-  .voyage {
-    gap: 32px;
-  }
   .voyage div img {
     width: 200px;
     height: 300px;
@@ -928,6 +931,12 @@ footer p {
   .intro p {
     width: 100%;
   }
+  .voyage {
+    flex-direction: column;
+  }
+  .voyage div {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 700px) {
   .menu {
@@ -949,8 +958,7 @@ footer p {
   h2 {
     font-size: 24px;
   }
-  .description-container,
-  .voyage {
+  .description-container {
     flex-direction: column;
     /* margin: 0 32px; */
   }
@@ -977,15 +985,19 @@ footer p {
   footer div:nth-child(2) {
     height: 135px;
   }
+  .gallery-card.small,
+  .gallery-card.medium {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 500px) {
   .gallery {
     margin: 0;
   }
-  .gallery-card.small,
+  /* .gallery-card.small,
   .gallery-card.medium {
     width: 100%;
-  }
+  } */
   .blog-menu-container {
     flex-direction: column;
     gap: 8px;
@@ -1045,5 +1057,12 @@ footer p {
   }
   .name-container {
     gap: 8px;
+  }
+  .voyage img:nth-child(2) {
+    width: 200px;
+    height: 260px;
+  }
+  .card-hotel {
+    width: 100%;
   }
 }
