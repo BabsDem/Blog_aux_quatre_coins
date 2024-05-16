@@ -3,10 +3,6 @@
 
     if(isset($_GET["page"]) && $_GET['page'] == "display_article"){
         $article = $_SESSION['article']; 
-        // if(isset($_SESSION["comments"])){
-        //     $comments = $_SESSION["comments"]; 
-        //     var_dump($comments); 
-        // }
     }
     if(isset($_GET['message'])){
         $message = $_GET["message"];
@@ -14,13 +10,10 @@
     if(isset($_SESSION['user'])){
         $user = $_SESSION['user'];
     }
-    if(isset($_SESSION["com"])){
-        $comments = $_SESSION["com"]; 
-        var_dump($comments); 
+    if(isset($_SESSION["comments"])){
+        $comments = $_SESSION["comments"]; 
     }
-    var_dump($_SESSION);
 ?>
-
 <div class="banner">
     <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">
 </div>
@@ -63,13 +56,11 @@
         <div>        
             <?php if(isset($user)): ?>
             <form action="/blog_aux_quatre_coins/controllers/commentController.php" method="post">
-                <?php echo $user["id_user"]; ?>
-            <span><?php echo $message ?? ""; ?></span>                
-            <input type="hidden" name="id_user" value="<?php echo $user['id_user'];?>">
+            <span><?php echo $message ?? ""; ?></span> 
             <input type="hidden" name="id_article" value="<?php echo $article["id_article"];?>">
                 <textarea name="user_comment" class="textarea-comment"></textarea>   
                 <label class="label-textarea">Laissez un commentaire !</label>
-                <input type="submit" name="submit_comment" value="Poster" class="btn">
+                <input type="submit" name="submit_create_comment" value="Poster" class="btn">
             </form>
             <?php else : ?>
                 <p>Si vous souhaitez laisser un commentaire, <a class="btn" href="signin.php">Inscrivez vous</a> ou <a class="btn" href="signup.php">Connectez vous </a></p>
@@ -86,6 +77,19 @@
                 <p>Marie Dupont</p>
                 <p>Cet article m’a vraiment donné envie de voyager ! Les descriptions des lieux sont si vivantes, on a l’impression d’y être. Merci pour ce partage !</p>
                 <p>Posté le samedi 23 mars 2024 à 14h08</p>
+            </div>
+        </div>
+
+        <div class="user-comment-card">
+            <div class="img-user-container">
+                <img src="../assets/img/banner_pool.png" alt="">
+            </div>
+            <div class="user-comment-container">
+            <?php foreach($comments as $comment) : ?>
+                <p><?php echo $comment['lastname'] . " ". $comment['firstname'];?></p>
+                <p><?php echo $comment['description'];?></p>
+                <p><?php echo $comment['date_creation'];?></p>
+                <?php endforeach ?>
             </div>
         </div>
     </section>

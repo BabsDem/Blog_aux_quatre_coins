@@ -51,7 +51,7 @@
             <div class="card-content">
                 <p> <?php echo $article['description']; ?></p>
                 <div class="btn-container">
-                    <a href="../controllers/articleController.php?page=display_article&id=<?php echo $article["id_article"]; ?>" class="btn">Découvrir</a>
+                    <a href="../controllers/commentController.php?page=display_article&id=<?php echo $article["id_article"]; ?>" class="btn">Découvrir</a>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ function createComment($user_id, $article_id, $description){
 
 function getAllComment($article_id){
     global $bdd; 
-    $req = $bdd->prepare("SELECT * FROM comments WHERE id_article = :id"); 
+    $req = $bdd->prepare("SELECT comments.*, users.lastname, users.firstname FROM comments INNER JOIN users ON comments.id_user = users.id_user WHERE id_article = :id ORDER BY date_creation DESC"); 
     $req->bindParam(":id", $article_id); 
     $req->execute(); 
     $comments = $req->fetchAll(); 
