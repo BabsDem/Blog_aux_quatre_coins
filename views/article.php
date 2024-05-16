@@ -10,8 +10,8 @@
     if(isset($_SESSION['user'])){
         $user = $_SESSION['user'];
     }
-    if(isset($_SESSION["comments"])){
-        $comments = $_SESSION["comments"]; 
+    if(isset($_SESSION["user_comments"])){
+        $comments = $_SESSION["user_comments"]; 
     }
 ?>
 <div class="banner">

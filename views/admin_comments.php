@@ -5,6 +5,9 @@
     session_destroy();
     header("Location: signin.php");
     } 
+    if(isset($_GET["page"]) && $_GET['page'] == "admin_comments"){
+        $comments = $_SESSION['comments']; 
+    }
 ?>
 
 <section class="section_admin_comments">
@@ -15,18 +18,22 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Description</th>
+                    <th>Id</th>
+                        <th class="large_width">Description</th>
                         <th>Date de création</th>
-                        <th>Id de l'article</th>
+                        <th>Id utilisateur</th>
+                        <th>Id article</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($users as $user): ?>
+                    <?php foreach($comments as $comment): ?>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $comment["id_comment"] ?></td>
+                        <td><?php echo $comment["description"] ?></td>
+                        <td><?php echo $comment["date_creation"] ?></td>
+                        <td><?php echo $comment["id_user"] ?></td>
+                        <td><?php echo $comment["id_article"] ?></td>
                         <td>
                             <div class="icons_container">
                                 <a href="">
