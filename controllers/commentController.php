@@ -24,6 +24,23 @@ if(isset($_POST["submit_create_comment"])){
         exit;
     }
 }
+if(isset($_POST["submit_admin_update_comment"])){
+    if(!empty($_POST['description'])){
+        $description = htmlspecialchars(trim($_POST['description'])); 
+        $commentId = htmlspecialchars(trim($_POST['comment_id']));
+        try{
+            updateComment($commentId, $description);
+            $_SESSION['comments'] = getAllComment(); 
+            
+        }catch(\Exception $e){
+            $_SESSION['errors']= $e->getMessage();
+            header("Location: ../views.admin_update_comment.php?comment_id=$commentId"); 
+            exit;
+        }
+        header("Location: ../views/admin_comments.php?page=admin_comments");
+        exit;
+    }
+}
 if(isset($_GET['page']) && $_GET['page'] === "display_article" && isset($_GET['id'])){
     $_SESSION["user_comments"] = getAllUserComment($_GET['id']);
     $_SESSION['article'] = getArticle($_GET['id']);
@@ -31,9 +48,15 @@ if(isset($_GET['page']) && $_GET['page'] === "display_article" && isset($_GET['i
     exit;
 }
 
-if(isset($_GET['page']) && $_GET['page'] === "admin_comments"){
-    $_SESSION["comments"] = getAllComment();
+if(isset($_GET['page']) && $_GET['page'] === "admin_comments" || isset($_GET["id_comment"])){
     header("Location: ../views/admin_comments.php?page=admin_comments");
     exit;
 
+}
+
+if(isset($_GET["comment_id"])){
+    deleteComment($_GET["comment_id"]);
+    $_SESSION['comments'] = getAllComment(); 
+    header("Location: ../views/admin_comments.php?page=admin_comments");
+    exit;
 }

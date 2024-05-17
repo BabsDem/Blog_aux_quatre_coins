@@ -79,19 +79,20 @@
                 <p>Posté le samedi 23 mars 2024 à 14h08</p>
             </div>
         </div>
-
+        <?php foreach($comments as $comment) : ?>
         <div class="user-comment-card">
             <div class="img-user-container">
                 <img src="../assets/img/banner_pool.png" alt="">
             </div>
             <div class="user-comment-container">
-            <?php foreach($comments as $comment) : ?>
+            
                 <p><?php echo $comment['lastname'] . " ". $comment['firstname'];?></p>
                 <p><?php echo $comment['description'];?></p>
                 <p><?php echo $comment['date_creation'];?></p>
-                <?php endforeach ?>
             </div>
         </div>
+        <?php endforeach ?>
+
     </section>
 </main>
 

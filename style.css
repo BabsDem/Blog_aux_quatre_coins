@@ -71,6 +71,10 @@ section {
   margin-bottom: 180px;
   width: 100%;
 }
+textarea {
+  font-family: Lato;
+  font-size: 16px;
+}
 .btn {
   background-color: var(--lightBlue);
   display: inline-block;
@@ -136,6 +140,7 @@ section {
 .form_admin_create_article input:not(input[type="submit"]),
 .form_admin_create_user input:not(input[type="submit"]),
 .form_admin_update_user input:not(input[type="submit"]),
+.form_admin_update_comment input:not(input[type="submit"]),
 .form_admin_create_article #categories,
 .form_admin_create_article #description,
 .form_admin_update_article input:not(input[type="submit"]),
@@ -810,7 +815,8 @@ table tbody tr:nth-child(odd) {
 .section_admin_articles,
 .section_admin_create_article,
 .section_admin_comments,
-.section_admin_update_article {
+.section_admin_update_article,
+.section_admin_update_comment {
   margin-bottom: 0;
   display: flex;
   min-height: calc(100vh - 220px);
@@ -818,7 +824,8 @@ table tbody tr:nth-child(odd) {
 .admin_create_article,
 .admin_create_user,
 .admin_update_article,
-.admin_update_user {
+.admin_update_user,
+.admin_update_comment {
   margin: 64px auto;
   background: white;
   max-width: 600px;
@@ -831,6 +838,12 @@ table tbody tr:nth-child(odd) {
 .input-form-container #description {
   margin-top: 16px;
   height: 60px;
+  border: 1px solid var(--darkBlue);
+  padding: 8px;
+}
+.input-form-container #description_comment {
+  margin-top: 16px;
+  height: 260px;
   border: 1px solid var(--darkBlue);
   padding: 8px;
 }

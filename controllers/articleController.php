@@ -12,10 +12,8 @@ if(isset($_POST['submit_admin_create_article'])){
         $category = htmlspecialchars(trim($_POST['categories']));
         $files = $_FILES['images']; 
 
-
         try{
         $articleId = createArticle($title, $subtitle, $place, $description, $category);      
-
         $uploadedFiles = [];
         for($i= 0; $i < count($files['name']); $i++){
             $file = [

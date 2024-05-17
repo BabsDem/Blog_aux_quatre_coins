@@ -18,7 +18,7 @@
             <table>
                 <thead>
                     <tr>
-                    <th>Id</th>
+                        <th>Id</th>
                         <th class="large_width">Description</th>
                         <th>Date de création</th>
                         <th>Id utilisateur</th>
@@ -36,10 +36,10 @@
                         <td><?php echo $comment["id_article"] ?></td>
                         <td>
                             <div class="icons_container">
-                                <a href="">
+                                <a href="admin_update_comment.php?comment_id=<?php echo $comment['id_comment'] ?>">
                                     <img src="../assets/svg/pen-solid.svg" alt="bouton modifier utilisateur">
                                 </a>
-                                <a href=""> 
+                                <a href="../controllers/commentController.php?comment_id=<?php echo $comment['id_comment'] ?>"> 
                                     <img src="../assets/svg/trash-solid.svg" alt="bouton supprimer utilisateur">
                                 </a>
                             </div>

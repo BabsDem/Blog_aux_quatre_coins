@@ -27,3 +27,27 @@ function getAllComment(){
     $comments = $req->fetchAll(); 
     return $comments;
 }
+
+function getComment($id){
+    global $bdd; 
+    $req = $bdd->prepare("SELECT * FROM comments WHERE id_comment = :id"); 
+    $req->bindParam(":id", $id); 
+    $req->execute(); 
+    $comment = $req->fetch(); 
+    return $comment;
+}
+
+function updateComment($id, $description){
+    global $bdd; 
+    $req = $bdd->prepare("UPDATE comments SET description = :description WHERE id_comment = :id"); 
+    $req->bindParam(":description", $description);
+    $req->bindParam(":id", $id);
+    $req->execute();
+}
+
+function deleteComment($id){
+    global $bdd; 
+    $req= $bdd->prepare("DELETE FROM comments WHERE id_comment= :id"); 
+    $req->bindParam(":id", $id); 
+    $req->execute(); 
+}
