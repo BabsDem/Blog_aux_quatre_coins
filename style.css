@@ -472,6 +472,9 @@ header {
   background-color: white;
   border-radius: 8px;
 }
+.blog-menu a {
+  color: var(--text);
+}
 .blog-menu button {
   appearance: none;
   border: none;

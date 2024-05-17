@@ -51,9 +51,7 @@ if(isset($_GET['page']) && $_GET['page'] === "display_article" && isset($_GET['i
 if(isset($_GET['page']) && $_GET['page'] === "admin_comments" || isset($_GET["id_comment"])){
     header("Location: ../views/admin_comments.php?page=admin_comments");
     exit;
-
 }
-
 if(isset($_GET["comment_id"])){
     deleteComment($_GET["comment_id"]);
     $_SESSION['comments'] = getAllComment(); 

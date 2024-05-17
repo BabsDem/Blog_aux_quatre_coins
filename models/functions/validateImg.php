@@ -17,10 +17,6 @@
     if(!in_array($fileExtension, $validExtension)){
         throw new Exception("Seulement le format jpg, jpeg, png, gif et webp sont acceptés");
     }
-
-
-
-
     
     $path = pathImg($id, $fileExtension, $directory, $file); 
     $uploadFile = $path["uploadFile"];

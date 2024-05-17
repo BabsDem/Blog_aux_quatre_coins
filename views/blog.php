@@ -1,7 +1,7 @@
 <?php 
     include "components/header.php"; 
 
-    if(isset($_GET["page"]) && $_GET['page'] == "blog"){
+    if(isset($_GET["page"]) && $_GET['page'] === "blog" || $_GET['page'] === "blog_villa"|| $_GET['page'] === "blog_hotel"){
         $articles = $_SESSION['articles']; 
     }
 
@@ -14,9 +14,9 @@
 <nav class="blog-menu-container">
     <p>Filtrée par :</p>
     <ul class="blog-menu">
-        <li><button>Hôtel</button></li>
-        <li><button>Villa</button></li>
-        <li><button>Tout voir</button></li>
+        <li><a href="../controllers/articleController.php?page=blog_hotel">Hôtel</a></li>
+        <li><a href="../controllers/articleController.php?page=blog_villa">Villa</a></li>
+        <li><a href="../controllers/articleController.php?page=blog">Tout voir</a></li>
     </ul>
 </nav>
 

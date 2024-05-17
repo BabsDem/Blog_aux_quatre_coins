@@ -39,25 +39,8 @@ if(isset($_POST['submit_admin_create_article'])){
             exit;
         }
     }
-}
-//READ ARTICLE
-if(isset($_GET['page']) && $_GET['page'] === "admin_articles"){
-    $_SESSION['articles'] = getAllArticle();
-    header("Location: ../views/admin_articles.php?page=admin_articles"); 
-    exit;
-}else if(isset($_GET['page']) && $_GET['page'] === "blog"){
-    $_SESSION['articles'] = getAllArticle();
-    header("Location: ../views/blog.php?page=blog"); 
-    exit;
-}
-else if(isset($_GET['page']) && $_GET['page'] === "display_article" && $_GET['id']){
-    $_SESSION['article'] = getArticle($_GET['id']);
-    header("Location: ../views/article.php?page=display_article"); 
-    exit;
-}
-
 //UPDATE ARTICLE
-if(isset($_POST['submit_admin_update_article'])){
+}else if(isset($_POST['submit_admin_update_article'])){
     if(!empty($_POST["title"]) && !empty($_POST["subtitle"]) && !empty($_POST["place"]) && !empty($_POST["description"]) && !empty($_POST["categories"])){
         $title = htmlspecialchars(trim($_POST["title"])); 
         $subtitle = htmlspecialchars(trim($_POST["subtitle"])); 
@@ -67,7 +50,6 @@ if(isset($_POST['submit_admin_update_article'])){
         $id = htmlspecialchars(trim($_POST['update_article_id']));  
         $files = $_FILES['images'];
         try{
-
         //    updateArticle($id, $title, $subtitle, $place, $description, $category);       
           
         //     $_SESSION["articles"] = getAllArticle();
@@ -91,7 +73,6 @@ if(isset($_POST['submit_admin_update_article'])){
 
             // header("Location: ../views/admin_articles?page=admin_articles"); 
             // exit; 
-        var_dump('$_FILES ::', $files);
 
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
@@ -101,6 +82,25 @@ if(isset($_POST['submit_admin_update_article'])){
         exit;
     }
 }
+$pages = [
+    "blog"=>"blog",
+    "blog_villa" => "villa",
+    "blog_hotel" => "hotel",
+];
+//READ ARTICLE
+if(isset($_GET['page']) && $_GET['page'] === "admin_articles"){
+    $_SESSION['articles'] = getAllArticle();
+    header("Location: ../views/admin_articles.php?page=admin_articles"); 
+    exit;
+}else if(isset($_GET['page']) && array_key_exists($_GET['page'], $pages)) {
+    $_SESSION['articles'] = getAllType($pages[$_GET['page']]);
+    header("Location: ../views/blog.php?page=" . $_GET['page']);
+    exit;
+}else if(isset($_GET['page']) && $_GET['page'] === "display_article" && $_GET['id']){
+    $_SESSION['article'] = getArticle($_GET['id']);
+    header("Location: ../views/article.php?page=display_article"); 
+    exit;
+}
 
 // DELETE ARTICLE
 if(isset($_GET['article_id'])){
@@ -109,3 +109,5 @@ if(isset($_GET['article_id'])){
     header("Location: ../views/admin_articles.php?page=admin_articles"); 
     exit;
 }
+
+

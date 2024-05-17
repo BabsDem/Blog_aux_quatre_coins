@@ -107,3 +107,12 @@ function getArticle($id){
         $req2->bindParam(":id", $id); 
         $req2->execute(); 
     }
+
+    function getAllType($category){
+        global $bdd; 
+        $req = $bdd->prepare("SELECT * FROM articles WHERE category= :category");
+        $req->bindParam(":category", $category); 
+        $req->execute(); 
+        $categoryArticle = $req->fetchAll(); 
+        return $categoryArticle;
+    }
