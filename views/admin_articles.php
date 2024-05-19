@@ -10,7 +10,6 @@
 
     if(isset($_GET["page"]) && $_GET['page'] == "admin_articles"){
         $articles = $_SESSION['articles']; 
-        var_dump($articles);
     }
 ?>
 
@@ -36,8 +35,8 @@
                     <tr>
                         <td><?php echo $article["id_article"] ?></td>
                         <td><?php echo $article["title"] ?></td>
-                        <td><?php echo $article["place"] ?></td>
                         <td><?php echo $article["subtitle"] ?></td>
+                        <td><?php echo $article["place"] ?></td>
                         <td><?php echo $article["description"] ?></td>
                         <td><?php echo $article["category"] ?></td>
                         <td>

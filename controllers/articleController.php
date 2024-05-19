@@ -25,8 +25,7 @@ if(isset($_POST['submit_admin_create_article'])){
             'size' => $files['size'][$i]
             ];
             // $_SESSION['errors'] = validateImg($file, $id, $directory);
-
-            $filename = validateImg($file, $articleId, "article"); 
+            $filename = validateImg($file, $articleId, "article", $i); 
             $uploadedFiles[] = $filename;
             $articleImg = createArticleImg($filename, $articleId);
         }
@@ -51,29 +50,27 @@ if(isset($_POST['submit_admin_create_article'])){
         $id = htmlspecialchars(trim($_POST['update_article_id']));  
         $files = $_FILES['images'];
         try{
-        //    updateArticle($id, $title, $subtitle, $place, $description, $category);       
-          
-        //     $_SESSION["articles"] = getAllArticle();
+           updateArticle($id, $title, $subtitle, $place, $description, $category);       
+            deleteImgArticle($id);        
 
-        //     $uploadedFiles = [];
-        //     for($i= 0; $i < count($files['name']); $i++){
+            $uploadedFiles = [];
+            for($i= 0; $i < count($files['name']); $i++){
               
-        //         $file = [
-        //         'name' => $files['name'][$i],
-        //         'type' => $files['type'][$i],
-        //         'tmp_name' => $files['tmp_name'][$i],
-        //         'error' => $files['error'][$i],
-        //         'size' => $files['size'][$i]
-        //         ];
-        //         $filename = validateImg($file, $id, "article", $i); 
-        //         $uploadedFiles[] = $filename;    
-        //         var_dump($filename); 
-        //     }     
-        //     $test = updateImageArticle($id, $filename);   
-        //     var_dump($test);
-
-            // header("Location: ../views/admin_articles?page=admin_articles"); 
-            // exit; 
+                $file = [
+                'name' => $files['name'][$i],
+                'type' => $files['type'][$i],
+                'tmp_name' => $files['tmp_name'][$i],
+                'error' => $files['error'][$i],
+                'size' => $files['size'][$i]
+                ];
+                $filename = validateImg($file, $id, "article", $i); 
+                $uploadedFiles[] = $filename;    
+                updateImgArticle($id,$filename);   
+            } 
+            unset($_SESSION['images']); 
+            $_SESSION["articles"] = getAllArticle();
+            header("Location: ../views/admin_articles?page=admin_articles"); 
+            exit; 
 
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
@@ -110,11 +107,6 @@ if(isset($_GET['page']) && $_GET['page'] === "blog_hotel"){
     $_SESSION['images'] = getAllImg(); 
     $_SESSION['articles'] = getAllType("hotel");
     header("Location: ../views/blog?page=blog_hotel"); 
-    exit;
-}
-else if(isset($_GET['page']) && $_GET['page'] === "display_article" && $_GET['id']){
-    $_SESSION['article'] = getArticle($_GET['id']);
-    header("Location: ../views/article.php?page=display_article"); 
     exit;
 }
 

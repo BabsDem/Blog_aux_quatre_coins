@@ -2,7 +2,7 @@
 
     include "pathImg.php";
 
-  function validateImg($file, $id, $directory){
+  function validateImg($file, $id, $directory, $index){
     
     $maxSize = 2000000; // 2 MO
     $validExtension = ['.jpg','.jpeg','.png','.gif', '.webp'];  
@@ -18,7 +18,7 @@
         throw new Exception("Seulement le format jpg, jpeg, png, gif et webp sont acceptés");
     }
     
-    $path = pathImg($id, $fileExtension, $directory, $file); 
+    $path = pathImg($id, $fileExtension, $directory, $file, $index); 
     $uploadFile = $path["uploadFile"];
     $fileName = $path["fileName"];
 

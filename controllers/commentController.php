@@ -41,9 +41,10 @@ if(isset($_POST["submit_admin_update_comment"])){
         exit;
     }
 }
-if(isset($_GET['page']) && $_GET['page'] === "display_article" && isset($_GET['id'])){
+if(isset($_GET['page']) && $_GET['page'] === "display_article" || isset($_GET['id'])){
     $_SESSION["user_comments"] = getAllUserComment($_GET['id']);
     $_SESSION['article'] = getArticle($_GET['id']);
+    $_SESSION['images_article'] = getImg($_GET['id']);
     header("Location: ../views/article.php?page=display_article"); 
     exit;
 }

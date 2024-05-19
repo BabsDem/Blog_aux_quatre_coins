@@ -3,7 +3,7 @@
 
     if(isset($_GET["page"]) && $_GET['page'] === "display_article"){
         $article = $_SESSION['article']; 
-        var_dump($article);
+        $images =$_SESSION['images_article'];
     }
     if(isset($_GET['message'])){
         $message = $_GET["message"];
@@ -14,17 +14,9 @@
     if(isset($_SESSION["user_comments"])){
         $comments = $_SESSION["user_comments"]; 
     }
-    var_dump("images");
-    $images = explode(',', $article["img"]);
-    var_dump($images); 
-
-    foreach($images as $img){
-        var_dump($img); 
-    }
- 
 ?>
 <div class="banner">
-    <img src="<?php echo $article["img"][0];?>" alt="">
+    <img src="<?php echo $article['img']?>" alt="">
 </div>
 
 <main>
@@ -38,9 +30,11 @@
     <section class="section-carroussel-container">
         <div class="wrapper-carroussel">
                 <ul class="carroussel">
+                    <?php foreach($images as $image): ?>
                     <li>
-                        <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">       
+                        <img src="<?php echo $image['img']; ?>" alt="">       
                     </li>
+                    <?php endforeach ?>
                 </ul>
                 <button class="btn-left">
                     <img src="../assets/svg/chevron-left.svg" alt="">

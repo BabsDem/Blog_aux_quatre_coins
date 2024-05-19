@@ -62,17 +62,27 @@
         $req->execute();
     }
 
-    function updateImageArticle($articleId, $img){
+    function deleteImgArticle($articleId){
         global $bdd; 
-        $req = $bdd->prepare("
-        UPDATE images 
-        INNER JOIN relation_articles_images 
-        ON images.id_img = relation_articles_images.id_img 
-        SET images.img= :img 
-        WHERE relation_articles_images.id_article = :articleId");
-        $req->bindParam(":img",$img); 
-        $req->bindParam(":articleId",$articleId); 
-        $req->execute();
+        $req = $bdd->prepare("DELETE FROM relation_articles_images WHERE id_article = :id"); 
+        $req->bindParam(":id", $articleId);
+        $req->execute(); 
+
+        //Supprime tous les enregistrements de la table images où id_img n'est pas présent dans le sous-ensemble de id_img sélectionné dans la table relation_articles_images.
+        $req = $bdd->prepare("DELETE FROM images WHERE id_img NOT IN (SELECT id_img FROM relation_articles_images)"); 
+        $req->execute(); 
+    }
+    function updateImgArticle($articleId, $img){
+        global $bdd;
+        $req = $bdd->prepare("INSERT INTO images (img) VALUES (:img)");
+        $req->bindParam(":img", $img); 
+        $req->execute(); 
+        $imgId = $bdd->lastInsertId(); 
+
+        $req = $bdd->prepare("INSERT INTO relation_articles_images (id_article, id_img) VALUES (:id_article , :id_img)"); 
+        $req->bindParam(":id_article", $articleId);
+        $req->bindParam(":id_img", $imgId); 
+        $req->execute(); 
     }
 
     // function updateImageArticle($id_article, $img, $index){
@@ -102,12 +112,9 @@
 
     function deleteArticle($id){
         global $bdd; 
-        $req = $bdd->prepare("
-        DELETE images 
-        FROM images 
-        INNER JOIN relation_articles_images 
-        ON images.id_img = relation_articles_images.id_img 
-        WHERE relation_articles_images.id_article = :id"); 
+        $req = $bdd->prepare("DELETE images FROM images 
+        INNER JOIN relation_articles_images as r ON images.id_img = r.id_img 
+        WHERE r.id_article = :id"); 
         $req->bindParam(":id", $id); 
         $req->execute(); 
         $req2 = $bdd->prepare("DELETE FROM articles WHERE id_article= :id"); 
@@ -137,6 +144,18 @@
         $req->execute(); 
         $images = $req->fetchAll(PDO::FETCH_ASSOC); 
         return $images;
+
+    }
+
+    function getImg($id){
+        global $bdd; 
+        $req = $bdd->prepare("SELECT img FROM images
+        INNER JOIN relation_articles_images as r on r.id_img = images.id_img
+        WHERE r.id_article = :id");
+        $req->bindParam(":id", $id); 
+        $req->execute(); 
+        $image = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $image;
 
     }
 
