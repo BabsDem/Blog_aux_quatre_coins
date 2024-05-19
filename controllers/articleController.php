@@ -12,8 +12,9 @@ if(isset($_POST['submit_admin_create_article'])){
         $category = htmlspecialchars(trim($_POST['categories']));
         $files = $_FILES['images']; 
 
-        try{
         $articleId = createArticle($title, $subtitle, $place, $description, $category);      
+        try{
+
         $uploadedFiles = [];
         for($i= 0; $i < count($files['name']); $i++){
             $file = [
@@ -26,11 +27,11 @@ if(isset($_POST['submit_admin_create_article'])){
             // $_SESSION['errors'] = validateImg($file, $id, $directory);
 
             $filename = validateImg($file, $articleId, "article"); 
-            var_dump($filename);exit;
             $uploadedFiles[] = $filename;
             $articleImg = createArticleImg($filename, $articleId);
         }
         $_SESSION['articles'] = getAllArticle();
+        // var_dump($_SESSION['articles']);exit;
         header("Location: ../views/admin_articles.php?page=admin_articles"); 
         exit;
         }catch(\Exception $e){
@@ -82,21 +83,36 @@ if(isset($_POST['submit_admin_create_article'])){
         exit;
     }
 }
-$pages = [
-    "blog"=>"blog",
-    "blog_villa" => "villa",
-    "blog_hotel" => "hotel",
-];
+// $pages = [
+//     "blog_villa" => "villa",
+//     "blog_hotel" => "hotel",
+// ];
 //READ ARTICLE
 if(isset($_GET['page']) && $_GET['page'] === "admin_articles"){
     $_SESSION['articles'] = getAllArticle();
     header("Location: ../views/admin_articles.php?page=admin_articles"); 
     exit;
-}else if(isset($_GET['page']) && array_key_exists($_GET['page'], $pages)) {
-    $_SESSION['articles'] = getAllType($pages[$_GET['page']]);
-    header("Location: ../views/blog.php?page=" . $_GET['page']);
+}
+
+if(isset($_GET['page']) && $_GET['page'] === "blog"){
+    $_SESSION['images'] = getAllImg(); 
+    $_SESSION['articles'] = getAllArticle();   
+    header("Location: ../views/blog?page=blog"); 
     exit;
-}else if(isset($_GET['page']) && $_GET['page'] === "display_article" && $_GET['id']){
+}
+if(isset($_GET['page']) && $_GET['page'] === "blog_villa"){
+    $_SESSION['images'] = getAllImg(); 
+    $_SESSION['articles'] = getAllType("villa");
+    header("Location: ../views/blog?page=blog_villa"); 
+    exit;
+}
+if(isset($_GET['page']) && $_GET['page'] === "blog_hotel"){
+    $_SESSION['images'] = getAllImg(); 
+    $_SESSION['articles'] = getAllType("hotel");
+    header("Location: ../views/blog?page=blog_hotel"); 
+    exit;
+}
+else if(isset($_GET['page']) && $_GET['page'] === "display_article" && $_GET['id']){
     $_SESSION['article'] = getArticle($_GET['id']);
     header("Location: ../views/article.php?page=display_article"); 
     exit;

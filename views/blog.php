@@ -3,7 +3,17 @@
 
     if(isset($_GET["page"]) && $_GET['page'] === "blog" || $_GET['page'] === "blog_villa"|| $_GET['page'] === "blog_hotel"){
         $articles = $_SESSION['articles']; 
+        $images = $_SESSION['images'];         
+        var_dump($_SESSION['articles']);
+        var_dump($_SESSION['images']);
+
     }
+
+    $articleImages = [];
+    foreach ($images as $image) {
+        $articleImages[$image['id_article']] = $image['img'];
+    }
+
 
 ?>
 
@@ -20,28 +30,14 @@
     </ul>
 </nav>
 
+
 <div class="blog-container">
+<?php foreach($articles as $article): ?>
     <article class="blog-card">
         <div class="img-blog-container">
-            <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">
-        </div>
-        <div>
-            <div class="card-header">
-                <h3>Das Klima Resort</h3>
-                <h4>Espagne</h4>
-            </div>
-            <div class="card-content">
-                <p> Lorsque l’on évoque le paradis, notre imagination s’envole vers des plages de sable fin, des eaux cristallines et des couchers de soleil enflammés. La villa paradisiaque incarne ce rêve éveillé, ce lieu où le temps se suspend et où chaque instant devient une poésie ...</p>
-                <div class="btn-container">
-                    <a href="article.php?"  class="btn">Découvrir</a>
-                </div>
-            </div>
-        </div>
-    </article>
-    <?php foreach($articles as $article): ?>
-    <article class="blog-card">
-        <div class="img-blog-container">
-            <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">
+        <?php if (isset($articleImages[$article['id_article']])): ?>
+            <img src="<?php echo $articleImages[$article['id_article']];?>" alt="">
+        <?php endif; ?>
         </div>
         <div>
             <div class="card-header">
@@ -51,10 +47,11 @@
             <div class="card-content">
                 <p> <?php echo $article['description']; ?></p>
                 <div class="btn-container">
-                    <a href="../controllers/commentController.php?page=display_article&id=<?php echo $article["id_article"]; ?>" class="btn">Découvrir</a>
-                </div>
+                <a href="../controllers/commentController.php?page=display_article&id=<?php echo $article["id_article"]; ?>" class="btn">Découvrir</a>
             </div>
         </div>
     </article>
     <?php endforeach ?>
+
+  
 </div>

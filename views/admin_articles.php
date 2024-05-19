@@ -10,6 +10,7 @@
 
     if(isset($_GET["page"]) && $_GET['page'] == "admin_articles"){
         $articles = $_SESSION['articles']; 
+        var_dump($articles);
     }
 ?>
 

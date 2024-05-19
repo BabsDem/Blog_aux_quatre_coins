@@ -14,6 +14,7 @@
         $articleId = $bdd->lastInsertId(); 
         return $articleId;  
     }
+
     function createArticleImg($img, $articleId){
         global $bdd; 
             $req2 = $bdd->prepare('INSERT INTO images (img) VALUES (:img)');
@@ -26,22 +27,29 @@
             $req3->bindParam(":id_img", $imgId);
             $req3->execute();
     }
-function getArticle($id){
-    global $bdd;
-    $req = $bdd->prepare("SELECT * FROM articles WHERE id_article = :id"); 
-    $req->bindParam(":id", $id); 
-    $req->execute(); 
-    $article = $req->fetch();
-    return $article;
-}
-    function getAllArticle(){
-        global $bdd;
-        $req = $bdd->prepare('SELECT * FROM articles');
-        $req->execute(); 
-        $articles = $req->fetchAll(); 
-        return $articles;
-    }
 
+    function getArticle($id){
+        global $bdd;
+        $req = $bdd->prepare("SELECT articles.*, images.img 
+        FROM articles 
+        INNER JOIN relation_articles_images as r ON articles.id_article = r.id_article 
+        INNER JOIN images ON r.id_img = images.id_img
+        WHERE articles.id_article = :id"); 
+        $req->bindParam(":id", $id); 
+        $req->execute(); 
+        $article = $req->fetch();
+        return $article;
+    }
+    // function getArticle($id){
+    //     global $bdd;
+    //     $req = $bdd->prepare("SELECT * FROM articles 
+    //     WHERE id_article = :id"); 
+    //     $req->bindParam(":id", $id); 
+    //     $req->execute(); 
+    //     $article = $req->fetch();
+    //     return $article;
+    // }
+ 
     function updateArticle($id, $title, $subtitle, $place, $description, $category){
         global $bdd; 
         $req = $bdd->prepare("UPDATE articles SET title= :title, subtitle= :subtitle, place= :place, description= :description, category= :category WHERE id_article= :id");
@@ -102,17 +110,46 @@ function getArticle($id){
         WHERE relation_articles_images.id_article = :id"); 
         $req->bindParam(":id", $id); 
         $req->execute(); 
-
         $req2 = $bdd->prepare("DELETE FROM articles WHERE id_article= :id"); 
         $req2->bindParam(":id", $id); 
         $req2->execute(); 
     }
 
+    // Ajouter colonne img_presentation dans articles 
+    function getAllArticle(){
+        global $bdd;
+        // $req = $bdd->prepare('SELECT articles.*, images.img  FROM articles 
+        //     INNER JOIN relation_articles_images as r ON articles.id_article = r.id_article
+        //     INNER JOIN images ON r.id_img = images.id_img
+        //     WHERE articles.id_article = r.id_article
+        // ');
+        $req= $bdd->prepare('SELECT * FROM articles');
+        $req->execute(); 
+        $articles = $req->fetchAll(PDO::FETCH_ASSOC); 
+        return $articles;
+    }
+
+    function getAllImg(){
+        global $bdd;
+        $req= $bdd->prepare('SELECT images.img, r.id_article FROM images 
+        INNER JOIN relation_articles_images as r ON r.id_img = images.id_img
+        INNER JOIN articles ON r.id_article = articles.id_article');
+        $req->execute(); 
+        $images = $req->fetchAll(PDO::FETCH_ASSOC); 
+        return $images;
+
+    }
+
     function getAllType($category){
         global $bdd; 
-        $req = $bdd->prepare("SELECT * FROM articles WHERE category= :category");
+        // $req = $bdd->prepare("SELECT articles.*, images.img FROM articles 
+        // INNER JOIN relation_articles_images 
+        // INNER JOIN images ON relation_articles_images.id_img = images.id_img       
+        //  WHERE category= :category");
+        $req= $bdd->prepare('SELECT * FROM articles WHERE category= :category');
         $req->bindParam(":category", $category); 
         $req->execute(); 
         $categoryArticle = $req->fetchAll(); 
+        // var_dump($categoryArticle);exit;
         return $categoryArticle;
     }

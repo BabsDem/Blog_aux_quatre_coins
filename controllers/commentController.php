@@ -12,7 +12,7 @@ if(isset($_POST["submit_create_comment"])){
         $userId = $_SESSION['user']["id_user"];
         try{
            createComment($userId, $articleId, $comment); 
-           $_SESSION["comments"] = getAllUserComment($articleId);
+           $_SESSION["user_comments"] = getAllUserComment($articleId);
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
         }
@@ -49,6 +49,7 @@ if(isset($_GET['page']) && $_GET['page'] === "display_article" && isset($_GET['i
 }
 
 if(isset($_GET['page']) && $_GET['page'] === "admin_comments" || isset($_GET["id_comment"])){
+    $_SESSION["comments"] = getAllComment();
     header("Location: ../views/admin_comments.php?page=admin_comments");
     exit;
 }

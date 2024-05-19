@@ -25,15 +25,14 @@ if(isset($_SESSION['user'])){
           </a>
         </div>
         <div class="menu-items">  
-        <li><a href="home.php">Accueil</a></li>
-        <li><a href="../controllers/articleController.php?page=blog">Blog</a></li>   
+          <li><a href="home.php">Accueil</a></li>
+          <li><a href="../controllers/articleController.php?page=blog">Blog</a></li> 
 
         <?php if(isset($user)):?>
           <?php if($_SESSION['user']['role'] == 0) : ?>
           <li><a href="account.php">Mon compte</a></li>
           <?php else : ?>
           <li><a href="../controllers/userController.php?page=admin_users">Tableau de bord</a></li>
-
             <?php endif ?>
           <li><a href="components/logout.php" >Déconnexion</a></li>
           <?php else : ?>
