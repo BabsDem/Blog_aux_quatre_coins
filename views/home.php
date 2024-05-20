@@ -2,6 +2,12 @@
 include "components/header.php"; 
 if(isset($_SESSION['articles'])){
     $articles = $_SESSION['articles']; 
+    var_dump($articles);
+}
+if(isset($_SESSION["images"])){
+    $images = $_SESSION["images"];
+    var_dump($images);
+
 }
 ?>
 <section class="section_home">
@@ -27,30 +33,20 @@ if(isset($_SESSION['articles'])){
     <h2>Les dernières perles cachées pour  <br><span>des vacances inoubliables</span></h2>
     <div class="gallery-container">
     <div class="gallery">
+        <?php for($i=0; $i < 2; $i++){ ?>
         <a href="article.php">     
-        <article class="gallery-card medium">
+        <article>
             <img src="../assets/img/hotel-das-klima-resort-1.png" alt=""> 
                 <div class="card-header">
-                    <h3>Hôtel Das Klima Resort</h3>
-                    <h4>Espagne</h4>
+                    <h3><?php echo $articles[$i]["title"] ;?></h3>
+                    <h4><?php echo $articles[$i]["place"] ;?></h4>
                 </div>
                 <p>
-                    Lorsque l’on évoque le paradis, notre imagination s’envole vers des plages de sable fin, des eaux cristallines et des couchers de soleil enflammés. La villa paradisiaque incarne ce rêve éveillé, ce lieu où le temps se suspend et où chaque instant devient une poésie ...
+                <?php echo $articles[$i]["description"] ;?>
                 </p>
         </article>
         </a>
-        <a href="article.php"> 
-            <article class="gallery-card small">
-                <img src="../assets/img/natura-ressort-presentation-1.png" alt=""> 
-                    <div class="card-header">
-                        <h3>Hôtel Natura Ressort</h3>
-                        <h4>Grèce</h4>
-                    </div>
-                    <p>
-                    Situé au cœur de la commune de Moncoutant, est une véritable oasis pour les amoureux de la nature. Cet établissement unique offre une expérience de vacances reposante ... 
-                    </p>
-            </article>
-        </a>
+        <?php }?>
     </div>
     <div class="gallery">
         <a href="article.php"> 

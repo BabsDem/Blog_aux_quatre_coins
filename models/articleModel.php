@@ -130,7 +130,7 @@
         //     INNER JOIN images ON r.id_img = images.id_img
         //     WHERE articles.id_article = r.id_article
         // ');
-        $req= $bdd->prepare('SELECT * FROM articles');
+        $req= $bdd->prepare('SELECT * FROM articles ORDER BY id_article DESC');
         $req->execute(); 
         $articles = $req->fetchAll(PDO::FETCH_ASSOC); 
         return $articles;
