@@ -4,7 +4,7 @@ if(isset($_SESSION['articles'])){
     $articles = $_SESSION['articles']; 
 }
 ?>
-<section>
+<section class="section_home">
     <div class="banner">
         <img src="../assets/img/banner_beach.png" alt="Plage sable fin">
     </div>
@@ -23,7 +23,7 @@ if(isset($_SESSION['articles'])){
     </div>       
 </section>
 
-<section>
+<section class="section_home">
     <h2>Les dernières perles cachées pour  <br><span>des vacances inoubliables</span></h2>
     <div class="gallery-container">
     <div class="gallery">
@@ -90,7 +90,7 @@ if(isset($_SESSION['articles'])){
     </div>   
 </section>
 
-<section>
+<section class="section_home">
     <div class="description-container">
         <div>
             <img src="../assets/img/banner_pool.png" alt="Vue d'une piscine avec transate">
@@ -103,7 +103,7 @@ if(isset($_SESSION['articles'])){
     </div>
 </section>
 
-<section>
+<section class="section_home">
     <h2>Découvertes Hôtelières, <br> <span>Les Nouveautés à ne pas manquer</span></h2>
     <div class="gallery-container">
         <div class="container-card-hotel">
@@ -152,7 +152,7 @@ if(isset($_SESSION['articles'])){
     </div>
 </section>
 
-<section>
+<section class="section_home">
     <div class="voyage">
         <div>
             <p>
@@ -167,7 +167,7 @@ if(isset($_SESSION['articles'])){
     </div>
 </section>
 
-<section>
+<section class="section_home">
     <h2>Villas de Rêve,<br> <span>les dernières pépites dévoilées</span></h2>
     <div class="gallery-container">
         <div class="container-card-villa">

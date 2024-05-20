@@ -11,7 +11,7 @@
 
     $articleImages = [];
     foreach ($images as $image) {
-        $articleImages[$image['id_article']] = $image['img'];
+        $articleImages[$image['id_article']][] = $image['img'];
     }
 
 
@@ -35,8 +35,8 @@
 <?php foreach($articles as $article): ?>
     <article class="blog-card">
         <div class="img-blog-container">
-        <?php if (isset($articleImages[$article['id_article']])): ?>
-            <img src="<?php echo $articleImages[$article['id_article']];?>" alt="">
+        <?php if (isset($articleImages[$article['id_article']]) && count($articleImages[$article['id_article']]) > 0):?>
+            <img src="<?php echo $articleImages[$article['id_article']][0];?>" alt="">
         <?php endif; ?>
         </div>
         <div>

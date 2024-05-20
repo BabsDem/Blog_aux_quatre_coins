@@ -67,14 +67,20 @@ li {
 a {
   text-decoration: none;
 }
-
-section:not(
+nav {
+  height: 80px;
+}
+/* section:not(
     .section-carroussel-container,
     .section-article-container,
     .section-comment-container
   ) {
   margin-bottom: 180px;
   width: 100%;
+} */
+
+.section_home {
+  margin-bottom: 180px;
 }
 textarea {
   font-family: Lato;
@@ -97,6 +103,20 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.btn-menu {
+  background-color: var(--lightBlue);
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: 0;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-family: Lato;
+  font-size: 16px;
+}
+.btn-menu a:visited {
+  color: white;
 }
 .btn p {
   margin: 0;
@@ -167,11 +187,12 @@ header {
   align-items: center;
   padding: 8px 64px;
 }
-.menu > div {
+.menu-items {
   display: flex;
   gap: 4rem;
+  align-items: center;
 }
-.menu a {
+.menu a:not(.btn-menu a) {
   color: var(--lightBlue);
   font-weight: bold;
   font-size: 18px;
@@ -941,9 +962,6 @@ footer p {
   }
 }
 @media screen and (max-width: 850px) {
-  .menu > div {
-    gap: 48px;
-  }
   .gallery {
     flex-wrap: wrap;
   }
@@ -971,6 +989,56 @@ footer p {
   .voyage div {
     width: 100%;
   }
+  .menu div:first-of-type {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .menu-items {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    gap: 48px;
+    right: 0;
+    left: 0;
+    top: 100%;
+    background: white;
+    text-align: center;
+    transition: 0.25s;
+    padding: 8px 0;
+  }
+  .menu-items.active {
+    display: block;
+  }
+  .menu-items.active li:not(li:last-of-type) {
+    padding: 16px 0;
+  }
+  .menu-items.active li:last-of-type {
+    display: inline-block;
+    margin-top: 8px;
+  }
+  header nav {
+    position: relative;
+  }
+  .icons-menu {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    display: block;
+  }
+  .close-icon {
+    display: none;
+  }
+  .close-icon.active {
+    display: block;
+  }
+
+  .close-icon,
+  .bars-menu {
+    cursor: pointer;
+  }
 }
 @media screen and (max-width: 700px) {
   .menu {
@@ -979,12 +1047,7 @@ footer p {
   .intro {
     margin: 0 32px;
   }
-  .menu-items li {
-    display: none;
-  }
-  .icon-menu {
-    display: flex;
-  }
+
   h1 {
     font-size: 48px;
     line-height: 60px;

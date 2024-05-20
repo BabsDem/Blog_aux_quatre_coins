@@ -2,7 +2,7 @@
 
     include "pathImg.php";
 
-  function validateImg($file, $id, $directory, $index, ){
+  function validateImg($file, $id, $directory, $index){
     
     $maxSize = 2000000; // 2 MO
     $validExtension = ['.jpg','.jpeg','.png','.gif', '.webp'];  
@@ -14,13 +14,13 @@
         throw new Exception("Une erreur est survenue lors du transfert");
     }else if(!in_array($fileExtension, $validExtension)){
         throw new Exception("Seulement le format jpg, jpeg, png, gif et webp sont acceptés");
-    }else{
-        throw new Exception("Le transfert a échoué");
     }
    
     $path = pathImg($id, $fileExtension, $directory, $file, $index); 
     $uploadFile = $path["uploadFile"];
     $fileName = $path["fileName"];
+
+    // var_dump($uploadFile); 
 
     if($uploadFile ){
         return $fileName;
