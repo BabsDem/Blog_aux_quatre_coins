@@ -1,5 +1,9 @@
 <?php 
 include "components/header.php";
+if(isset($_SESSION['errors'])){
+    var_dump($_SESSION['errors']);
+    unset($_SESSION['errors']);
+}
 ?>
 
 <section class="section_admin_create_article">

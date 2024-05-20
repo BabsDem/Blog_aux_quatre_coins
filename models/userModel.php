@@ -1,7 +1,7 @@
 <?php
 require ("db.php");
 
-function checkUserExists(string $email): bool {
+function checkUserExists($email) {
         global $bdd;
         $req = $bdd->prepare("SELECT email FROM users WHERE email = :email");
         $req->bindParam(":email", $email);
@@ -11,7 +11,7 @@ function checkUserExists(string $email): bool {
 }
 
 // Ajouter l'user à la BDD 
-function addUser(string $lastname, string $firstname, string $email, string $password){
+function addUser( $lastname, $firstname, $email, $password){
     global $bdd;
     // Si l'email n'existe pas en BDD on ajoute, l'user en BDD
     if(!checkUserExists($email)){
@@ -21,8 +21,6 @@ function addUser(string $lastname, string $firstname, string $email, string $pas
         $req->bindParam(":email", $email); 
         $req->bindParam(":password", $password); 
         $img = "bird.jpeg";
-        // DIR pour dossier
-        // $pathImg = __DIR__ . "/public/" . $img; 
         $pathImg ="../public/profile/" . $img; 
         $req->bindParam(":img", $pathImg); 
         $req->execute();  

@@ -11,33 +11,32 @@ if(isset($_POST['submit_admin_create_article'])){
         $description = htmlspecialchars(trim($_POST['description']));
         $category = htmlspecialchars(trim($_POST['categories']));
         $files = $_FILES['images']; 
-
+        
         $articleId = createArticle($title, $subtitle, $place, $description, $category);      
-        try{
 
-        $uploadedFiles = [];
-        for($i= 0; $i < count($files['name']); $i++){
-            $file = [
-            'name' => $files['name'][$i],
-            'type' => $files['type'][$i],
-            'tmp_name' => $files['tmp_name'][$i],
-            'error' => $files['error'][$i],
-            'size' => $files['size'][$i]
-            ];
-            // $_SESSION['errors'] = validateImg($file, $id, $directory);
-            $filename = validateImg($file, $articleId, "article", $i); 
-            $uploadedFiles[] = $filename;
-            $articleImg = createArticleImg($filename, $articleId);
-        }
+        try{
+            $uploadedFiles = [];
+            for($i= 0; $i < count($files['name']); $i++){
+                $file = [
+                'name' => $files['name'][$i],
+                'type' => $files['type'][$i],
+                'tmp_name' => $files['tmp_name'][$i],
+                'error' => $files['error'][$i],
+                'size' => $files['size'][$i]
+                ];
+                // $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);  
+                $filename = validateImg($file, $articleId, "article", $i);
+                $uploadedFiles[] = $filename;
+                $articleImg = createArticleImg($filename, $articleId);
+            }
         $_SESSION['articles'] = getAllArticle();
-        // var_dump($_SESSION['articles']);exit;
-        header("Location: ../views/admin_articles.php?page=admin_articles"); 
-        exit;
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
             header("Location: ../views/admin_create_article.php"); 
             exit;
         }
+        header("Location: ../views/admin_articles.php?page=admin_articles"); 
+        exit;
     }
 //UPDATE ARTICLE
 }else if(isset($_POST['submit_admin_update_article'])){

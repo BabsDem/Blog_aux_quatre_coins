@@ -30,17 +30,23 @@
     <section class="section-carroussel-container">
         <div class="wrapper-carroussel">
                 <ul class="carroussel">
-                    <?php foreach($images as $image): ?>
-                    <li>
+                    <?php 
+                    $index = 0;
+                    foreach($images as $image): 
+                    ?>
+                    <li class="<?php echo $index === 0 ? 'active' : ''; ?>">
                         <img src="<?php echo $image['img']; ?>" alt="">       
                     </li>
-                    <?php endforeach ?>
+                    <?php 
+                    $index++;
+                    endforeach 
+                    ?>
                 </ul>
-                <button class="btn-left">
-                    <img src="../assets/svg/chevron-left.svg" alt="">
+                <button class="btn-carroussel btn-left" id="prev">
+                    <img src="../assets/svg/chevron-left.svg" alt="Bouton permettant d'aller à l'image précédente">
                 </button>
-                <button class="btn-right">
-                    <img src="../assets/svg/chevron-right.svg" alt="">
+                <button class="btn-carroussel btn-right" id="next">
+                    <img src="../assets/svg/chevron-right.svg" alt="Bouton permettant d'aller à l'image suivante">
                 </button>
         </div>
     </section>
