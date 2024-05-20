@@ -403,7 +403,12 @@ header {
   margin: 16px;
 }
 .gallery article > p {
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 7px 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .description-container {
   display: flex;
@@ -921,12 +926,6 @@ footer p {
   .gallery a:nth-child(even) {
     width: 340px;
   }
-  /* .gallery-card.medium {
-    width: 500px;
-  }
-  .gallery-card.small {
-    width: 340px;
-  } */
   .gallery:first-of-type {
     margin-bottom: 28px;
   }
