@@ -27,19 +27,19 @@
                         <th>Lieu</th>
                         <th class="large_width">Description</th>
                         <th>Catégorie</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach($articles as $article): ?>
                     <tr>
-                        <td><?php echo $article["id_article"] ?></td>
-                        <td><?php echo $article["title"] ?></td>
-                        <td><?php echo $article["subtitle"] ?></td>
-                        <td><?php echo $article["place"] ?></td>
-                        <td><?php echo $article["description"] ?></td>
-                        <td><?php echo $article["category"] ?></td>
-                        <td>
+                        <td data-cell="Id"><?php echo $article["id_article"] ?></td>
+                        <td data-cell="Nom"><?php echo $article["title"] ?></td>
+                        <td data-cell="Titre"><?php echo $article["subtitle"] ?></td>
+                        <td data-cell="Lieu"><?php echo $article["place"] ?></td>
+                        <td data-cell="Description" class="description_content_admin"><?php echo $article["description"] ?></td>
+                        <td data-cell="Catégorie"><?php echo $article["category"] ?></td>
+                        <td data-cell="Actions">
                             <div class="icons_container">
                                 <a href="admin_update_article.php?article_id=<?php echo $article['id_article']; ?>">
                                     <img src="../assets/svg/pen-solid.svg" alt="bouton modifier article">

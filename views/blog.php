@@ -4,8 +4,8 @@
     if(isset($_GET["page"]) && $_GET['page'] === "blog" || $_GET['page'] === "blog_villa"|| $_GET['page'] === "blog_hotel"){
         $articles = $_SESSION['articles']; 
         $images = $_SESSION['images'];         
-        var_dump($_SESSION['articles']);
-        var_dump($_SESSION['images']);
+        // var_dump($_SESSION['articles']);
+        // var_dump($_SESSION['images']);
 
     }
 

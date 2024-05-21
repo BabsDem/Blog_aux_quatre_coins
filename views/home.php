@@ -9,6 +9,11 @@ if(isset($_SESSION["images"])){
     var_dump($images);
 
 }
+
+include "../models/articleModel.php"; 
+
+$articles = getAllArticle(); 
+var_dump($articles);
 ?>
 <section class="section_home">
     <div class="banner">

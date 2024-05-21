@@ -28,11 +28,11 @@
                 <tbody>
                     <?php foreach($users as $user): ?>
                     <tr>
-                        <td><?php echo $user["id_user"] ?></td>
-                        <td><?php echo $user["lastname"] ?></td>
-                        <td><?php echo $user["firstname"] ?></td>
-                        <td><?php echo $user["email"] ?></td>
-                        <td>
+                        <td data-cell="Id"><?php echo $user["id_user"] ?></td>
+                        <td data-cell="Nom"><?php echo $user["lastname"] ?></td>
+                        <td data-cell="Prénom"><?php echo $user["firstname"] ?></td>
+                        <td data-cell="Email"><?php echo $user["email"] ?></td>
+                        <td data-cell="Actions">
                             <div class="icons_container">
                                 <a href="admin_update_user.php?user_id=<?php echo $user['id_user']; ?>">
                                     <img src="../assets/svg/pen-solid.svg" alt="bouton modifier utilisateur">

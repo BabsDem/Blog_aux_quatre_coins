@@ -29,12 +29,12 @@
                 <tbody>
                     <?php foreach($comments as $comment): ?>
                     <tr>
-                        <td><?php echo $comment["id_comment"] ?></td>
-                        <td><?php echo $comment["description"] ?></td>
-                        <td><?php echo $comment["date_creation"] ?></td>
-                        <td><?php echo $comment["id_user"] ?></td>
-                        <td><?php echo $comment["id_article"] ?></td>
-                        <td>
+                        <td data-cell="Id"><?php echo $comment["id_comment"] ?></td>
+                        <td data-cell="Description" class="description_content_admin"><?php echo $comment["description"] ?></td>
+                        <td data-cell="Date de création"><?php echo $comment["date_creation"] ?></td>
+                        <td data-cell="Id utilisateur"><?php echo $comment["id_user"] ?></td>
+                        <td data-cell="Id article"><?php echo $comment["id_article"] ?></td>
+                        <td data-cell="Actions">
                             <div class="icons_container">
                                 <a href="admin_update_comment.php?comment_id=<?php echo $comment['id_comment'] ?>">
                                     <img src="../assets/svg/pen-solid.svg" alt="bouton modifier utilisateur">

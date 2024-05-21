@@ -36,7 +36,7 @@ if(isset($_SESSION['errors'])){
 
             </div>
             <input type="submit" name="submit_connexion" value="Se connecter" class="submit" />
-            <a href="" class="link-forgot-password">
+            <a href="reset_password.php" class="link-forgot-password">
               <p>Mot de passe oublié</p>
             </a>
             <a href="signup.php" class="link-to-inscription"
