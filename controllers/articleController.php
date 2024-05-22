@@ -79,11 +79,15 @@ if(isset($_POST['submit_admin_create_article'])){
         exit;
     }
 }
-// $pages = [
-//     "blog_villa" => "villa",
-//     "blog_hotel" => "hotel",
-// ];
+
 //READ ARTICLE
+if(isset($_GET['page']) && $_GET['page'] === "home"){
+    $_SESSION['articles_villa'] = getAllType("villa");
+    $_SESSION['articles_hotel'] = getAllType("hotel");
+    $_SESSIOn['images'] = getAllImg();
+    header("Location: ../views/home.php?page=home"); 
+    exit;
+}
 if(isset($_GET['page']) && $_GET['page'] === "admin_articles"){
     $_SESSION['articles'] = getAllArticle();
     header("Location: ../views/admin_articles.php?page=admin_articles"); 

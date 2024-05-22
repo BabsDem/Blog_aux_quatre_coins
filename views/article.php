@@ -3,7 +3,7 @@
 
     if(isset($_GET["page"]) && $_GET['page'] === "display_article"){
         $article = $_SESSION['article']; 
-        $images =$_SESSION['images_article'];
+        $images = $_SESSION['images_article'];
     }
     if(isset($_GET['message'])){
         $message = $_GET["message"];

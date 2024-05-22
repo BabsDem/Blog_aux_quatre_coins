@@ -22,12 +22,12 @@ if(isset($_SESSION['user'])){
     <nav>
       <ul class="menu">
         <div>
-          <a href="home.php">
+          <a href="../controllers/articleController.php?page=home">
             <img src="../assets/img/logo.png" class="logo-header" alt="">
           </a>
         </div>
         <div class="menu-items">  
-          <li><a href="home.php">Accueil</a></li>
+          <li><a href="../controllers/articleController.php?page=home">Accueil</a></li>
           <li><a href="../controllers/articleController.php?page=blog">Blog</a></li> 
         <?php if(isset($user)):?>
           <?php if($_SESSION['user']['role'] == 0) : ?>

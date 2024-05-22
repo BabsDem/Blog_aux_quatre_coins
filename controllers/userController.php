@@ -25,7 +25,7 @@ if(isset($_POST['submit_inscription'])){
                 header("Location: ../views/signup.php");
                 exit;
             }
-            header("Location: ../views/home.php");
+            header("Location: ../views/home.php?page=home");
             exit;
         }else{
             header("Location: ../views/signup.php");
@@ -46,7 +46,7 @@ if(isset($_POST['submit_inscription'])){
             $user = getUser($email);
             if (password_verify($password, $user['password'])) {                    
                 $_SESSION['user'] = $user;
-                header("Location: ../views/home.php");
+                header("Location: ../views/home.php?page=home");
                 exit;
             } else {
                 $_SESSION['errors']['password'] = "Le mot de passe est incorrect"; 

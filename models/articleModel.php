@@ -135,12 +135,12 @@
         $articles = $req->fetchAll(PDO::FETCH_ASSOC); 
         return $articles;
     }
-
+//DERNIERE MODIF ORDER BY
     function getAllImg(){
         global $bdd;
         $req= $bdd->prepare('SELECT images.img, r.id_article FROM images 
         INNER JOIN relation_articles_images as r ON r.id_img = images.id_img
-        INNER JOIN articles ON r.id_article = articles.id_article');
+        INNER JOIN articles ON r.id_article = articles.id_article ORDER BY id_article DESC');
         $req->execute(); 
         $images = $req->fetchAll(PDO::FETCH_ASSOC); 
         return $images;
@@ -161,14 +161,9 @@
 
     function getAllType($category){
         global $bdd; 
-        // $req = $bdd->prepare("SELECT articles.*, images.img FROM articles 
-        // INNER JOIN relation_articles_images 
-        // INNER JOIN images ON relation_articles_images.id_img = images.id_img       
-        //  WHERE category= :category");
-        $req= $bdd->prepare('SELECT * FROM articles WHERE category= :category');
+        $req= $bdd->prepare('SELECT * FROM articles WHERE category= :category ORDER BY id_article DESC');
         $req->bindParam(":category", $category); 
         $req->execute(); 
         $categoryArticle = $req->fetchAll(); 
-        // var_dump($categoryArticle);exit;
         return $categoryArticle;
     }

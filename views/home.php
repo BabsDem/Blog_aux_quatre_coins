@@ -1,19 +1,25 @@
 <?php 
 include "components/header.php"; 
-if(isset($_SESSION['articles'])){
-    $articles = $_SESSION['articles']; 
-    var_dump($articles);
-}
-if(isset($_SESSION["images"])){
-    $images = $_SESSION["images"];
-    var_dump($images);
-
-}
-
 include "../models/articleModel.php"; 
 
-$articles = getAllArticle(); 
-var_dump($articles);
+if(isset($_GET['page']) && $_GET['page'] === "home"){
+    $villas = $_SESSION['articles_villa']; 
+    $hotels = $_SESSION['articles_hotel'];
+}else{
+    $villas = getAllType('villa');
+    $hotels = getAllType('hotel');
+
+}
+
+if(isset($_SESSION["images"])){
+    $images = $_SESSION["images"];
+}else{
+    $images = getAllImg(); 
+}
+
+
+
+
 ?>
 <section class="section_home">
     <div class="banner">
@@ -39,45 +45,38 @@ var_dump($articles);
     <div class="gallery-container">
     <div class="gallery">
         <?php for($i=0; $i < 2; $i++){ ?>
-        <a href="article.php">     
-        <article>
-            <img src="../assets/img/hotel-das-klima-resort-1.png" alt=""> 
+        <a href="../controllers/commentController.php?id=<?php echo $hotels[$i]['id_article'];?>&page=display_article">     
+            <article>
+            <?php foreach($images as $image):
+            $imageIndex = array_search($hotels[$i]['id_article'], array_column($images, 'id_article'));?>
+                <img src="<?php echo $images[$imageIndex]['img']?>" alt=""> 
+            <?php break; endforeach ?>
                 <div class="card-header">
-                    <h3><?php echo $articles[$i]["title"] ;?></h3>
-                    <h4><?php echo $articles[$i]["place"] ;?></h4>
+                    <h3><?php echo $hotels[$i]["title"] ;?></h3>
+                    <h4><?php echo $hotels[$i]["place"] ;?></h4>
                 </div>
-                <p>
-                <?php echo $articles[$i]["description"] ;?>
-                </p>
-        </article>
+                <p><?php echo $hotels[$i]["description"] ;?></p>
+            </article>
         </a>
         <?php }?>
     </div>
+
     <div class="gallery">
-        <a href="article.php"> 
-            <article class="gallery-card small">
-                <img src="../assets/img/villa-palmeraie-presentation-1.png" alt=""> 
-                    <div class="card-header">
-                        <h3>Villa Palmeraie</h3>
-                        <h4>Italie</h4>
-                    </div>
-                    <p>
-                    Située à deux pas d’un quartier animé, la Villa Palmeraie est une oasis de tranquillité pour ceux qui cherchent à échapper à l’agitation de la ville sans renoncer à ses commodités ...
-                    </p>
+        <?php for($i=0; $i < 2; $i++): ?>
+        <a href="../controllers/commentController.php?id=<?php echo $hotels[$i]['id_article'];?>&page=display_article">     
+            <article>
+            <?php foreach($images as $image):
+            $imageIndex = array_search($villas[$i]['id_article'], array_column($images, 'id_article'));?>
+                <img src="<?php echo $images[$imageIndex]['img']?>" alt=""> 
+            <?php break; endforeach ?>
+                <div class="card-header">
+                    <h3><?php echo $villas[$i]["title"] ;?></h3>
+                    <h4><?php echo $villas[$i]["place"] ;?></h4>
+                </div>
+                <p><?php echo $villas[$i]["description"] ;?></p>
             </article>
         </a>
-        <a href="article.php"> 
-            <article class="gallery-card medium">
-                <img src="../assets/img/oasis-du-voyageur-presentation-1.png" alt="">         
-                    <div class="card-header">
-                        <h3>Villa l'Oasis du voyageur</h3>
-                        <h4>Espagne</h4>
-                    </div>
-                    <p>
-                    Nichée à proximité d’une grande ville, la villa “L’Oasis du Voyageur” est un véritable joyau pour les voyageurs en quête de confort et de modernité. Cette villa spacieuse offre un cadre idéal pour se détendre après une journée d’exploration urbaine.
-                    </p>
-            </article>
-        </a>
+        <?php endfor ?>
     </div>
 
     <div class="btn-container">
@@ -108,39 +107,21 @@ var_dump($articles);
     <h2>Découvertes Hôtelières, <br> <span>Les Nouveautés à ne pas manquer</span></h2>
     <div class="gallery-container">
         <div class="container-card-hotel">
-            <a href="article.php"> 
+            <?php for($i=0; $i < 3; $i++):?>
+            <a href="../controllers/commentController.php?id=<?php echo $hotels[$i]['id_article'];?>&page=display_article"> 
                 <article class="card-hotel">
-                    <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">
+                <?php foreach($images as $image):
+                $imageIndex = array_search($hotels[$i]['id_article'], array_column($images, 'id_article'));?>
+                    <img src="<?php echo $images[$imageIndex]['img']?>" alt=""> 
+                <?php break; endforeach ?>
                     <div class="card-header">
-                        <h3>Hôtel Das Klima Resort</h3>
-                        <h4>Espagne</h4>
+                        <h3><?php echo $hotels[$i]["title"] ;?></h3>
+                        <h4><?php echo $hotels[$i]["place"] ;?></h4>
                     </div>
-                    <p>Situé au cœur de la commune de Moncoutant, est une véritable oasis pour les amoureux de la nature. Cet établissement unique offre une expérience de vacances reposante ... 
-                    </p>
+                    <p><?php echo $hotels[$i]["description"] ;?></p>
                 </article>
             </a>
-            <a href="article.php"> 
-                <article class="card-hotel">
-                    <img src="../assets/img/natura-ressort-presentation-1.png" alt="">
-                    <div class="card-header">
-                        <h3>Hôtel Fée Dodo Resort</h3>
-                        <h4>Grèce</h4>
-                    </div>
-                    <p>Niché au cœur d’un paysage tropical luxuriant, le Fée Dodo Resort est plus qu’un simple hôtel, c’est un paradis pour les familles à la recherche d’une escapade mémorable. Dès votre arrivée, vous êtes accueilli par le doux parfum des fleurs exotiques et ...
-                    </p>
-                </article>
-            </a>
-            <a href="article.php"> 
-                <article class="card-hotel">
-                    <img src="../assets/img/hotel-fee-dodo-ressort-presentation-1.png" alt="">
-                    <div class="card-header">
-                        <h3>Hôtel Das Klima Resort</h3>
-                        <h4>Espagne</h4>
-                    </div>
-                    <p>Lorsque l’on évoque le paradis, notre imagination s’envole vers des plages de sable fin, des eaux cristallines et des couchers de soleil enflammés. La villa paradisiaque incarne ce rêve éveillé, ce lieu où le temps se suspend et où chaque instant devient une poésie ...
-                    </p>
-                </article>
-            </a>
+            <?php endfor ?>
         </div>
         <div class="btn-container">
         <div class="btn">
@@ -171,40 +152,22 @@ var_dump($articles);
 <section class="section_home">
     <h2>Villas de Rêve,<br> <span>les dernières pépites dévoilées</span></h2>
     <div class="gallery-container">
-        <div class="container-card-villa">
-            <a href="article.php"> 
+        <div class="container-card-villa">   
+            <?php for($i=0; $i < 3; $i++): ?>
+            <a href="../controllers/commentController.php?id=<?php echo $villas[$i]['id_article'];?>&page=display_article"> 
                 <article class="card-villa">
-                    <img src="../assets/img/hotel-das-klima-resort-1.png" alt="">
+                <?php foreach($images as $image):
+                $imageIndex = array_search($villas[$i]['id_article'], array_column($images, 'id_article'));?>
+                    <img src="<?php echo $images[$imageIndex]['img']?>" alt=""> 
+                <?php break; endforeach ?>
                     <div class="card-header">
-                        <h3>Hôtel Das Klima Resort</h3>
-                        <h4>Espagne</h4>
+                        <h3><?php echo $villas[$i]["title"] ;?></h3>
+                        <h4><?php echo $villas[$i]["place"] ;?></h4>
                     </div>
-                    <p>Situé au cœur de la commune de Moncoutant, est une véritable oasis pour les amoureux de la nature. Cet établissement unique offre une expérience de vacances reposante ... 
-                    </p>
+                    <p><?php echo $villas[$i]["description"] ;?></p>
                 </article>
             </a>
-            <a href="article.php"> 
-                <article class="card-villa">
-                    <img src="../assets/img/natura-ressort-presentation-1.png" alt="">
-                    <div class="card-header">
-                        <h3>Hôtel Fée Dodo Resort</h3>
-                        <h4>Grèce</h4>
-                    </div>
-                    <p>Niché au cœur d’un paysage tropical luxuriant, le Fée Dodo Resort est plus qu’un simple hôtel, c’est un paradis pour les familles à la recherche d’une escapade mémorable. Dès votre arrivée, vous êtes accueilli par le doux parfum des fleurs exotiques et ...
-                    </p>
-                </article>
-            </a>
-            <a href="article.php"> 
-                <article class="card-villa">
-                    <img src="../assets/img/hotel-fee-dodo-ressort-presentation-1.png" alt="">
-                    <div class="card-header">
-                        <h3>Hôtel Das Klima Resort</h3>
-                        <h4>Espagne</h4>
-                    </div>
-                    <p>Lorsque l’on évoque le paradis, notre imagination s’envole vers des plages de sable fin, des eaux cristallines et des couchers de soleil enflammés. La villa paradisiaque incarne ce rêve éveillé, ce lieu où le temps se suspend et où chaque instant devient une poésie ...
-                    </p>
-                </article>
-            </a>
+            <?php endfor ?>
         </div>
         <div class="btn-container">
         <div class="btn">
