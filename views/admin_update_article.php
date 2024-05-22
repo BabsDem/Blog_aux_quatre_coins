@@ -52,10 +52,9 @@ if(isset($_SESSION["errors"])){
                     <label for="categories">Choisir une catégorie d'article</label>
                 </div>
                 <div>
+                    <span class="error"><?php echo $errors ?? "" ; ?></span>
                     <input type="file" id="images" name="images[]" multiple>
                     <label for="images" class="btn btn-file">Choisir des images</label>
-                    <span><?php echo $errors ?? "" ; ?></span>
-
                 </div>
              
                 <input type="submit" name="submit_admin_update_article" value="Modifier" class="btn submit-account"/>

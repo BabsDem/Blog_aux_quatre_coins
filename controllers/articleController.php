@@ -11,12 +11,9 @@ if(isset($_POST['submit_admin_create_article'])){
         $description = htmlspecialchars(trim($_POST['description']));
         $category = htmlspecialchars(trim($_POST['categories']));
         $files = $_FILES['images']; 
-        
-         
-
         try{
-            $uploadedFiles = [];
             $articleId = createArticle($title, $subtitle, $place, $description, $category); 
+            $uploadedFiles = [];
             for($i= 0; $i < count($files['name']); $i++){
                 $file = [
                 'name' => $files['name'][$i],
@@ -25,18 +22,17 @@ if(isset($_POST['submit_admin_create_article'])){
                 'error' => $files['error'][$i],
                 'size' => $files['size'][$i]
                 ];
-                $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);  
+                $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
 
                 $_SESSION['errors'] = validateImg($file, $fileExtension);
 
-                if(empty($_SESSION["errors"])){                    
+                if(empty($_SESSION["errors"])){                
                     $filename = pathImg($articleId, $fileExtension,"article", $file, $i);
                     $uploadedFiles[] = $filename;
                     $articleImg = createArticleImg($filename, $articleId);
                 }
             }
-           
-        $_SESSION['articles'] = getAllArticle();
+            $_SESSION['articles'] = getAllArticle();
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
             header("Location: ../views/admin_create_article.php"); 
@@ -56,11 +52,9 @@ if(isset($_POST['submit_admin_create_article'])){
         $id = htmlspecialchars(trim($_POST['update_article_id']));  
         $files = $_FILES['images'];
         try{
-           updateArticle($id, $title, $subtitle, $place, $description, $category);       
             deleteImgArticle($id);        
             $uploadedFiles = [];
             for($i= 0; $i < count($files['name']); $i++){
-              
                 $file = [
                 'name' => $files['name'][$i],
                 'type' => $files['type'][$i],
@@ -68,10 +62,16 @@ if(isset($_POST['submit_admin_create_article'])){
                 'error' => $files['error'][$i],
                 'size' => $files['size'][$i]
                 ];
-                $filename = validateImg($file, $id, "article", $i); 
-                $uploadedFiles[] = $filename;    
-                updateImgArticle($id,$filename);   
+                $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
+                $_SESSION['errors'] = validateImg($file, $fileExtension);
+
+                if(empty($_SESSION["errors"])){                
+                    $filename = pathImg($articleId, $fileExtension,"article", $file, $i);
+                    $uploadedFiles[] = $filename;
+                    updateImgArticle($id,$filename); 
+                }
             } 
+            updateArticle($id, $title, $subtitle, $place, $description, $category);  
             unset($_SESSION['images']); 
             $_SESSION["articles"] = getAllArticle();
             header("Location: ../views/admin_articles?page=admin_articles"); 
@@ -79,13 +79,12 @@ if(isset($_POST['submit_admin_create_article'])){
 
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
-            
+            header("Location: ../views/admin_update_article.php?article_id=". $id); 
+            exit;
         }
-        header("Location: ../views/admin_update_article.php?article_id=". $id); 
-        exit;
+        
     }
 }
-
 //READ ARTICLE
 if(isset($_GET['page']) && $_GET['page'] === "home"){
     $_SESSION['articles_villa'] = getAllType("villa");
@@ -99,7 +98,6 @@ if(isset($_GET['page']) && $_GET['page'] === "admin_articles"){
     header("Location: ../views/admin_articles.php?page=admin_articles"); 
     exit;
 }
-
 if(isset($_GET['page']) && $_GET['page'] === "blog"){
     $_SESSION['images'] = getAllImg(); 
     $_SESSION['articles'] = getAllArticle();   
@@ -118,7 +116,6 @@ if(isset($_GET['page']) && $_GET['page'] === "blog_hotel"){
     header("Location: ../views/blog?page=blog_hotel"); 
     exit;
 }
-
 // DELETE ARTICLE
 if(isset($_GET['article_id'])){
     deleteArticle($_GET['article_id']); 

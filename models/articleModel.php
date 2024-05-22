@@ -1,5 +1,4 @@
 <?php 
-
     require "db.php"; 
 
     function createArticle($title, $subtitle, $place, $description, $category){
@@ -84,31 +83,6 @@
         $req->bindParam(":id_img", $imgId); 
         $req->execute(); 
     }
-
-    // function updateImageArticle($id_article, $img, $index){
-    //     global $bdd; 
-    
-    //     // Récupérer l'id_img correspondant à l'id_article et à l'index de l'image
-    //     $req1 = $bdd->prepare("
-    //     SELECT id_img 
-    //     FROM relation_articles_images 
-    //     WHERE id_article = :id_article 
-    //     ORDER BY id_relation 
-    //     LIMIT 1 OFFSET :index");
-    //     $req1->bindParam(":id_article", $id_article); 
-    //     $req1->bindParam(":index", $index, PDO::PARAM_INT); 
-    //     $req1->execute();
-    //     $id_img = $req1->fetchColumn();
-    
-    //     // Mettre à jour l'image dans la table images
-    //     $req2 = $bdd->prepare("
-    //     UPDATE images 
-    //     SET img = :img 
-    //     WHERE id_img = :id_img");
-    //     $req2->bindParam(":img", $img); 
-    //     $req2->bindParam(":id_img", $id_img); 
-    //     $req2->execute();
-    // }
 
     function deleteArticle($id){
         global $bdd; 
