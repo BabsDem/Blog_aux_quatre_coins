@@ -1,7 +1,7 @@
 <?php 
 include "components/header.php";
 if(isset($_SESSION['errors'])){
-    var_dump($_SESSION['errors']);
+   $errors =$_SESSION['errors'];
     unset($_SESSION['errors']);
 }
 ?>
@@ -49,6 +49,7 @@ if(isset($_SESSION['errors'])){
                     <label for="categories">Choisir une catégorie d'article</label>
                 </div>
                 <div>
+                    <span class="error"><?php echo $errors ?? "" ?></span>
                     <input type="file" id="images" name="images[]" multiple>
                     <label for="images" class="btn btn-file">Choisir des images</label>
                 </div>

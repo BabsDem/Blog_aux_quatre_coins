@@ -30,9 +30,9 @@ function validateSignup ($lastname = null, $firstname = null, $email = null, $pa
             $errors["confirm_password"] = "Les mots de passe ne sont pas identiques";
         }
         $regexPassword = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/";   
-        // if(!preg_match($regexPassword, $password)){
-        //     $errors["password"] = "Le mot de passe doit contenir au moins 7 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial";
-        // }
+        if(!preg_match($regexPassword, $password)){
+            $errors["password"] = "Le mot de passe doit contenir au moins 7 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial";
+        }
     }
 
     return $errors;

@@ -25,7 +25,7 @@ if(isset($_GET['message'])){
             <div class="input-form-container">
               <input type="email" required id="email" autofocus autocomplete="off" name="email"/>
               <label for="email">Email</label>
-              <span class="connexion-error"><?php echo $errors['email'] ?? ""; ?></span>
+              <span class="error"><?php echo $errors['email'] ?? ""; ?></span>
             </div>
             <div class="input-form-container">
               <input
@@ -36,7 +36,7 @@ if(isset($_GET['message'])){
                 autocomplete="off"
               />
               <label for="password">Mot de passe</label>
-              <span class="connexion-error"><?php echo $errors['password'] ?? "";  ?></span>
+              <span class="error"><?php echo $errors['password'] ?? "";  ?></span>
 
             </div>
             <input type="submit" name="submit_connexion" value="Se connecter" class="submit" />
