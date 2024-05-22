@@ -476,6 +476,9 @@ header {
 .card-villa p {
   padding: 0 16px 16px 16px;
 }
+.card-body {
+  width: 100%;
+}
 .voyage {
   display: flex;
   gap: 180px;

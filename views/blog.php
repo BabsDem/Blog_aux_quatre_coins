@@ -36,7 +36,7 @@
             <img src="<?php echo $articleImages[$article['id_article']][0];?>" alt="">
         <?php endif; ?>
         </div>
-        <div>
+        <div class="card-body">
             <div class="card-header">
                 <h3><?php echo $article['title']; ?></h3>
                 <h4><?php echo $article['place']; ?></h4>
@@ -52,3 +52,5 @@
 
   
 </div>
+
+<?php include "components/footer.php";?>
