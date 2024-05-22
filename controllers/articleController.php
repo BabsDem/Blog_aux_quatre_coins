@@ -12,10 +12,11 @@ if(isset($_POST['submit_admin_create_article'])){
         $category = htmlspecialchars(trim($_POST['categories']));
         $files = $_FILES['images']; 
         
-        $articleId = createArticle($title, $subtitle, $place, $description, $category);      
+         
 
         try{
             $uploadedFiles = [];
+            $articleId = createArticle($title, $subtitle, $place, $description, $category); 
             for($i= 0; $i < count($files['name']); $i++){
                 $file = [
                 'name' => $files['name'][$i],
@@ -24,11 +25,17 @@ if(isset($_POST['submit_admin_create_article'])){
                 'error' => $files['error'][$i],
                 'size' => $files['size'][$i]
                 ];
-                // $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);  
-                $filename = validateImg($file, $articleId, "article", $i);
-                $uploadedFiles[] = $filename;
-                $articleImg = createArticleImg($filename, $articleId);
+                $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);  
+
+                $_SESSION['errors'] = validateImg($file, $fileExtension);
+
+                if(empty($_SESSION["errors"])){                    
+                    $filename = pathImg($articleId, $fileExtension,"article", $file, $i);
+                    $uploadedFiles[] = $filename;
+                    $articleImg = createArticleImg($filename, $articleId);
+                }
             }
+           
         $_SESSION['articles'] = getAllArticle();
         }catch(\Exception $e){
             $_SESSION['errors']= $e->getMessage();
@@ -51,7 +58,6 @@ if(isset($_POST['submit_admin_create_article'])){
         try{
            updateArticle($id, $title, $subtitle, $place, $description, $category);       
             deleteImgArticle($id);        
-
             $uploadedFiles = [];
             for($i= 0; $i < count($files['name']); $i++){
               
