@@ -3,6 +3,7 @@
 <?php
   if(isset($_SESSION['errors'])){
     $errors = $_SESSION['errors']; 
+    var_dump($errors);
     unset($_SESSION['errors']);            
 
   }
@@ -15,34 +16,20 @@
 <main class="reset_password">
       <div>
         <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-reset-password">      
-          <h1>Inscrivez vous !</h1>
-          <div class="name-container">
-            <div class="input-form-container">
-              <input
-                type="text"
-                required
-                id="last_name"
-                name="last_name"
-                autocomplete="off"
-                autofocus
-              />
-              <label for="lastName">Nom</label>
-              <span class="inscription-error"><?php echo $errors['lastname'] ?? "";?> </span>
-            </div>
-            <div class="input-form-container">
-              <input type="text" required id="firstName"  name="first_name" autocomplete="off" />
-              <label for="firstName">Prénom</label>
-              <span class="inscription-error"><?php echo $errors['firstname'] ?? "";?> </span>
-            </div>
-          </div>
+          <h1>Réinitialisation du mot de passe</h1>
+
           <div class="input-form-container">
             <input type="email" required id="email"  name="email" autocomplete="off"  value="<?php echo $data['email'] ?? ""?>"/>
             <label for="email">Email</label>
             <span class="inscription-error"><?php echo $errors['email'] ?? "";?> </span>
           </div>
-         
-          <input type="submit" name="submit_reset_password" value="S'inscrire" class="submit" />
-        
+
+          <div class="input-form-container">
+            <input type="text" required id="token"  name="token" autocomplete="off"/>
+            <label for="token">Votre token</label>
+            <span class="inscription-error"><?php echo $errors['token'] ?? "";?> </span>
+          </div>
+          <input type="submit" name="submit_reset_password" value="Réinitialiser" class="submit_reset_password" />        
         </form>
       </div>
     </main>

@@ -18,7 +18,7 @@ if(isset($_POST['submit_inscription'])){
         if(empty( $_SESSION['errors'])){
             try{
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                addUser( $lastname, $firstname, $email , $password);
+                addUser($lastname, $firstname, $email , $password);
                 $_SESSION['user'] = getUser($email); 
             }catch(\Exception $e){
                 $_SESSION['errors']['email'] = $e->getMessage();
@@ -173,6 +173,39 @@ if(isset($_POST['submit_inscription'])){
         }else{
             header("Location: ../views/admin_update_user.php?user_id=". $id);
             exit;
+        }
+    }
+}else if(isset($_POST['submit_reset_password'])){
+    if(!empty($_POST['email']) && !empty($_POST['token'])){
+        $email = htmlspecialchars(trim(strtolower($_POST['email']))); 
+        $token = htmlspecialchars(trim(strtolower($_POST['token']))); 
+        try{
+            $user = getUser($email); 
+            $_SESSION['errors'] = validateSignup (null, null, $email,null, null);
+            if(empty($_SESSION['errors'])) {
+                if(checkUserExists($email)){
+                    if($token === $user['token']){
+                        $token = password_hash($token, PASSWORD_DEFAULT);
+                        resetPassword($user['id_user'],$token);
+                        $message = "Connectez vous avec le token"; 
+                        header("Location: ../views/signin.php?message=$message"); 
+                        exit;
+                    }else{
+                    $_SESSION['errors']['token'] = "Votre token est incorrect !"; 
+                    header("Location: ../views/reset_password.php");
+                    exit;
+                    }
+                }else{
+                    $_SESSION['errors']['email'] = "Votre email n'existe pas !"; 
+                    header("Location: ../views/reset_password.php");
+                    exit;
+                }
+            }else{
+                header("Location: ../views/reset_password.php");
+                exit; 
+            }
+        }catch(\Exception $e){
+            $_SESSION['errors'] = $e->getMessage(); 
         }
     }
 }

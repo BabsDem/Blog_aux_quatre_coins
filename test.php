@@ -1,3 +1,3 @@
 <?php
-
-var_dump($_SERVER); 
+$uniqId =  uniqid('-',true);
+var_dump($uniqId); 

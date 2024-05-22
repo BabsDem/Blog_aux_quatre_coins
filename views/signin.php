@@ -5,6 +5,9 @@ if(isset($_SESSION['errors'])){
   // Je détruis la sessions pour eviter que les erreurs s'affichent lors d'un changement de page 
   unset($_SESSION['errors']);
 }
+if(isset($_GET['message'])){
+  $message = $_GET['message']; 
+}
 ?>
 
 <div class="connexion-container">
@@ -18,6 +21,7 @@ if(isset($_SESSION['errors'])){
         <div>
           <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-connexion">
             <h1>Connectez vous !</h1>
+            <span><?php echo $message ?? "";?></span>
             <div class="input-form-container">
               <input type="email" required id="email" autofocus autocomplete="off" name="email"/>
               <label for="email">Email</label>

@@ -15,13 +15,17 @@ function addUser( $lastname, $firstname, $email, $password){
     global $bdd;
     // Si l'email n'existe pas en BDD on ajoute, l'user en BDD
     if(!checkUserExists($email)){
-        $req = $bdd->prepare("INSERT INTO users (lastname, firstname, email, password, img) VALUES (:lastname, :firstname, :email, :password, :img)");
+        $uniqId =  uniqid('-',true);
+        $token = $firstname . $uniqId;
+        $img = "bird.jpeg";
+        $pathImg ="../public/profile/" . $img; 
+
+        $req = $bdd->prepare("INSERT INTO users (lastname, firstname, email, password, img, token) VALUES (:lastname, :firstname, :email, :password, :img, :token)");
         $req->bindParam(":lastname", $lastname); 
         $req->bindParam(":firstname", $firstname); 
         $req->bindParam(":email", $email); 
-        $req->bindParam(":password", $password); 
-        $img = "bird.jpeg";
-        $pathImg ="../public/profile/" . $img; 
+        $req->bindParam(":password", $password);     
+        $req->bindParam(':token', $token); 
         $req->bindParam(":img", $pathImg); 
         $req->execute();  
     // Sinon on ajoute une exception      
@@ -94,6 +98,14 @@ function updateUserPassword($id, $password){
 function deleteUser($id){
     global $bdd;
     $req= $bdd->prepare("DELETE FROM users WHERE id_user= :id"); 
+    $req->bindParam(":id", $id); 
+    $req->execute(); 
+}
+
+function resetPassword($id, $token){
+    global $bdd; 
+    $req = $bdd->prepare('UPDATE users SET password= :password WHERE id_user= :id');
+    $req->bindParam(":password", $token);
     $req->bindParam(":id", $id); 
     $req->execute(); 
 }
