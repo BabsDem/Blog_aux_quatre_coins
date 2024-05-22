@@ -30,13 +30,13 @@ if(isset($_GET['message'])){
             <p>Email :</p>
             <p><?php echo $user["email"] ?></p>
         </div>  
-        <div>
+        <div class="account_token">
             <p>Token :</p>
             <p><?php echo $user["token"] ?></p>
         </div>  
 
         <div>
-            <a href="account_modify.php" class="btn" >Modifier mes informations</a>
+            <a href="account_modify.php" class="btn account-modify-btn" >Modifier mes informations</a>
         </div>
     </div>
 </section>

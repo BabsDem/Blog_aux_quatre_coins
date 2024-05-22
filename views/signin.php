@@ -21,7 +21,7 @@ if(isset($_GET['message'])){
         <div>
           <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-connexion">
             <h1>Connectez vous !</h1>
-            <span><?php echo $message ?? "";?></span>
+            <span class="token"><?php echo $message ?? "";?></span>
             <div class="input-form-container">
               <input type="email" required id="email" autofocus autocomplete="off" name="email"/>
               <label for="email">Email</label>

@@ -1,5 +1,6 @@
 <?php 
     include "components/header.php"; 
+    include "../models/functions/formatDate.php";
 
     if(isset($_GET["page"]) && $_GET['page'] === "display_article"){
         $article = $_SESSION['article']; 
@@ -76,7 +77,10 @@
             <div class="user-comment-container">            
                 <p><?php echo $comment['lastname'] . " ". $comment['firstname'];?></p>
                 <p><?php echo $comment['description'];?></p>
-                <p><?php echo $comment['date_creation'];?></p>
+                <p>Posté le <?php 
+                $comment['date_creation'] = formatDateFr($comment['date_creation']);
+                echo $comment['date_creation']; ?></p>
+                
             </div>
         </div>
         <?php endforeach ?>

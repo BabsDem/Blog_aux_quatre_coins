@@ -36,7 +36,14 @@ function getComment($id){
     $comment = $req->fetch(); 
     return $comment;
 }
-
+function getCommentToFormat($userId){
+    global $bdd; 
+    $req = $bdd->prepare("SELECT * FROM comments WHERE id_user = :id"); 
+    $req->bindParam(":id", $userId); 
+    $req->execute(); 
+    $comment = $req->fetch(); 
+    return $comment;
+}
 function updateComment($id, $description){
     global $bdd; 
     $req = $bdd->prepare("UPDATE comments SET description = :description WHERE id_comment = :id"); 

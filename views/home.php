@@ -1,27 +1,20 @@
 <?php 
 include "components/header.php"; 
 include "../models/articleModel.php"; 
-
-var_dump($_SESSION);
 if(isset($_GET['page']) && $_GET['page'] === "home"){
-    $villas = $_SESSION['articles_villa']; 
-    $hotels = $_SESSION['articles_hotel'];
-}else{
-    $villas = getAllType('villa');
-    $hotels = getAllType('hotel');
-
+    if(!isset($_SESSION['articles_villa'])|| !isset($_SESSION['articles_hotel'])){
+        $villas = getAllType('villa');
+        $hotels = getAllType('hotel');
+    }else{
+        $villas = $_SESSION['articles_villa']; 
+        $hotels = $_SESSION['articles_hotel'];
+    }
 }
-
 if(isset($_SESSION["images"])){
     $images = $_SESSION["images"];
 }else{
     $images = getAllImg(); 
-    var_dump($images);
 }
-
-
-
-
 ?>
 <section class="section_home">
     <div class="banner">

@@ -13,7 +13,6 @@
         $articleId = $bdd->lastInsertId(); 
         return $articleId;  
     }
-
     function createArticleImg($img, $articleId){
         global $bdd; 
             $req2 = $bdd->prepare('INSERT INTO images (img) VALUES (:img)');
@@ -26,7 +25,6 @@
             $req3->bindParam(":id_img", $imgId);
             $req3->execute();
     }
-
     function getArticle($id){
         global $bdd;
         $req = $bdd->prepare("SELECT articles.*, images.img 
@@ -39,16 +37,6 @@
         $article = $req->fetch();
         return $article;
     }
-    // function getArticle($id){
-    //     global $bdd;
-    //     $req = $bdd->prepare("SELECT * FROM articles 
-    //     WHERE id_article = :id"); 
-    //     $req->bindParam(":id", $id); 
-    //     $req->execute(); 
-    //     $article = $req->fetch();
-    //     return $article;
-    // }
- 
     function updateArticle($id, $title, $subtitle, $place, $description, $category){
         global $bdd; 
         $req = $bdd->prepare("UPDATE articles SET title= :title, subtitle= :subtitle, place= :place, description= :description, category= :category WHERE id_article= :id");
@@ -83,7 +71,6 @@
         $req->bindParam(":id_img", $imgId); 
         $req->execute(); 
     }
-
     function deleteArticle($id){
         global $bdd; 
         $req = $bdd->prepare("DELETE images FROM images 
@@ -95,21 +82,13 @@
         $req2->bindParam(":id", $id); 
         $req2->execute(); 
     }
-
-    // Ajouter colonne img_presentation dans articles 
     function getAllArticle(){
         global $bdd;
-        // $req = $bdd->prepare('SELECT articles.*, images.img  FROM articles 
-        //     INNER JOIN relation_articles_images as r ON articles.id_article = r.id_article
-        //     INNER JOIN images ON r.id_img = images.id_img
-        //     WHERE articles.id_article = r.id_article
-        // ');
         $req= $bdd->prepare('SELECT * FROM articles ORDER BY id_article DESC');
         $req->execute(); 
         $articles = $req->fetchAll(PDO::FETCH_ASSOC); 
         return $articles;
     }
-//DERNIERE MODIF ORDER BY
     function getAllImg(){
         global $bdd;
         $req= $bdd->prepare('SELECT images.img, r.id_article FROM images 
@@ -118,9 +97,7 @@
         $req->execute(); 
         $images = $req->fetchAll(PDO::FETCH_ASSOC); 
         return $images;
-
     }
-
     function getImg($id){
         global $bdd; 
         $req = $bdd->prepare("SELECT img FROM images
@@ -130,9 +107,7 @@
         $req->execute(); 
         $image = $req->fetchAll(PDO::FETCH_ASSOC);
         return $image;
-
     }
-
     function getAllType($category){
         global $bdd; 
         $req= $bdd->prepare('SELECT * FROM articles WHERE category= :category ORDER BY id_article DESC');

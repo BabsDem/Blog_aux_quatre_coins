@@ -1,0 +1,3 @@
+"id_user","lastname","firstname","email","password","img","token","role"
+"1","admin","admin","admin@admin.com","$2y$10$U6mEemeI6bm0RMHJ7SU2Meq6Bqt8fxtuDoAwfudjCynj9ZP6wqa9S","../public/profile/bird.jpeg","admin-664e600ebce6f7.38725347","1"
+"2","test","test","test@test.com","$2y$10$Z/FDRwMGj3BT7wk7iuT6c.at1boQPMpZK82vfd.Ga2jTYixHRO0ze","../public/profile/bird.jpeg","test-664e73fe30aa93.93063258","0"
