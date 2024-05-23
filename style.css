@@ -829,6 +829,12 @@ header {
 .account-data {
   text-transform: capitalize;
 }
+.account_btn_container {
+  display: flex;
+}
+.delete_account {
+  background: rgb(187, 24, 24);
+}
 /* Modifier mes infos */
 input[type="file"] {
   display: none;
@@ -1228,6 +1234,9 @@ footer p {
   .icons_container {
     justify-content: start;
   }
+  .account_btn_container a {
+    text-align: center;
+  }
 }
 @media screen and (max-width: 500px) {
   .gallery {
@@ -1287,6 +1296,13 @@ footer p {
     min-width: 100px;
     height: 100px;
     min-height: 100px;
+  }
+  .account_btn_container {
+    flex-direction: column;
+    margin: 32px 0;
+  }
+  .account_btn_container a {
+    margin: 0;
   }
 }
 @media screen and (max-width: 400px) {

@@ -33,9 +33,9 @@ if(isset($_GET['message'])){
             <p>Token :</p>
             <p><?php echo $user["token"] ?></p>
         </div>  
-
-        <div>
+        <div class="account_btn_container">
             <a href="account_modify.php" class="btn account-modify-btn">Modifier mes informations</a>
+            <a href="../controllers/userController.php?page=delete_account&id=<?php echo $user['id_user'];?>" class="btn delete_account">Supprimer mon compte</a>
         </div>
     </div>
 </section>

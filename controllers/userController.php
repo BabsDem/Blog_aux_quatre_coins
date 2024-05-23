@@ -223,6 +223,12 @@ if(isset($_GET['page']) && $_GET['page'] === "admin_users"){
     header("Location: ../views/admin_users.php?page=admin_users"); 
     exit;
 }
+if(isset($_GET['page']) && $_GET['page'] === "delete_account" && $_GET['id']){
+    deleteUser($_GET['id']); 
+    unset($_SESSION['user']);
+    header("Location: ../views/home.php?page=home"); 
+    exit;
+}
 if(isset($_GET['user_id'])){
     deleteUser($_GET['user_id']); 
     $_SESSION["users"] = getAllUser(); 
