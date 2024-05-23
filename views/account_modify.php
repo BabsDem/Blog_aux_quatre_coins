@@ -25,7 +25,7 @@ if(isset($_GET['message'])){
                <!-- id communique avec for du label ce qui le rend fonctionnel -->
                 <input type="file" id="profile_img" name="profile_img">
                 <label for="profile_img" class="btn btn-file">Choisissez une image</label>
-                <span><?php echo $errors['img'] ?? ""; ?></span>
+                <span class="error"><?php echo $errors['img'] ?? ""; ?></span>
                 <span><?php echo $message ?? ""; ?></span>
 
             </div>

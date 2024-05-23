@@ -1,6 +1,6 @@
 <?php
 
-function pathImg($id, $extension, $directory, $file, $index){
+function pathImg($id, $extension, $directory, $file, $index = null){
     date_default_timezone_set('Europe/Paris');
     $date = date("Hi");
     $fileName =  "../public/$directory/". $id . "img-". $index . "_". $date .".". $extension;

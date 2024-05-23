@@ -13,6 +13,7 @@ if(isset($_SESSION['user'])){
     <script src="../assets/js/textarea__article.js" defer></script>
     <script src="../assets/js/img__on_change.js" defer></script>
     <script src="../assets/js/mobile_menu.js" defer></script>
+    <script src="../assets/js/time_out.js" defer></script>
 
     <link rel="stylesheet" href="../style.css" />
   </head>

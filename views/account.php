@@ -5,7 +5,6 @@ if(!$_SESSION['user']){
 }else{
     $user = $_SESSION['user'];
 }
-
 if(isset($_GET['message'])){
     $message = $_GET['message'];
 }
@@ -14,7 +13,7 @@ if(isset($_GET['message'])){
 <section class="section-account-container">   
     <h1>Mon espace client</h1>
     <div class="account-content">
-        <span><?php echo $message ?? "" ?></span>
+        <span id="password_message" class="success"><?php echo $message ?? "" ?></span>
         <div class="img-account-container">
             <img src="<?php echo $user['img']; ?>" alt="">
         </div>
@@ -36,7 +35,7 @@ if(isset($_GET['message'])){
         </div>  
 
         <div>
-            <a href="account_modify.php" class="btn account-modify-btn" >Modifier mes informations</a>
+            <a href="account_modify.php" class="btn account-modify-btn">Modifier mes informations</a>
         </div>
     </div>
 </section>

@@ -317,7 +317,9 @@ header {
   text-decoration: none;
   font-weight: bold;
 }
-
+.success {
+  color: rgb(29, 136, 29);
+}
 .error {
   margin-top: 8px;
   color: rgb(165, 0, 0);

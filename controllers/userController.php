@@ -4,6 +4,8 @@ include "../models/userModel.php";
 include "../models/articleModel.php";
 include "../models/functions/validateSignup.php";
 include "../models/functions/validateImg.php";
+include_once "../models/functions/pathImg.php";
+
 
 
 if(isset($_POST['submit_inscription'])){
@@ -79,8 +81,9 @@ if(isset($_POST['submit_inscription'])){
         $file = $_FILES['profile_img'];   
         $user = $_SESSION['user']; 
         try{
-            //A modifier validate img                   
-            $filename = validateImg($file, $user['id_user'], "profile", $index = 0); 
+            $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $_SESSION['errors'] = validateImg($file, $fileExtension); 
+            $filename = pathImg($user['id_user'], $fileExtension, "profile", $file, null) ;
             $_SESSION['user'] = updateUser($user["id_user"], $lastname, $firstname, $email, $filename);
             $_SESSION["errors"] = validateSignup($lastname,$firstname, $email, null,null);
             header("Location: ../views/account.php");
