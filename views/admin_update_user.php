@@ -21,7 +21,7 @@
     </div>
 
     <div class="admin_update_user">
-        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form_admin_update_user">   
+        <form action="/controllers/userController.php" method="post" class="form_admin_update_user">   
           <h2>Modifier les données de l'utilisateur</h2>
           <input type="hidden" name="update_user_id" value="<?php echo $userId; ?>">
           <div class="name-container">

@@ -19,7 +19,7 @@ if(isset($_GET['message'])){
       </div>
       <main class="form-container">
         <div>
-          <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-connexion">
+          <form action="/controllers/userController.php" method="post" class="form-connexion">
             <h1>Connectez vous !</h1>
             <span class="token"><?php echo $message ?? "";?></span>
             <div class="input-form-container">

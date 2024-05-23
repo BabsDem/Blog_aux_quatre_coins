@@ -55,7 +55,7 @@
     <section class="section-comment-container">
         <div>        
             <?php if(isset($user)): ?>
-            <form action="/blog_aux_quatre_coins/controllers/commentController.php" method="post">
+            <form action="/controllers/commentController.php" method="post">
             <span><?php echo $message ?? ""; ?></span> 
             <input type="hidden" name="id_article" value="<?php echo $article["id_article"];?>">
                 <textarea name="user_comment" class="textarea-comment"></textarea>   

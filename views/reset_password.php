@@ -15,7 +15,7 @@
 
 <main class="reset_password">
       <div>
-        <form action="/blog_aux_quatre_coins/controllers/userController.php" method="post" class="form-reset-password">      
+        <form action="/controllers/userController.php" method="post" class="form-reset-password">      
           <h1>Réinitialisation du mot de passe</h1>
 
           <div class="input-form-container">

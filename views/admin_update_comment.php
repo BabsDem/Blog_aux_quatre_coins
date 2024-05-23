@@ -19,7 +19,7 @@
     </div>
 
     <div class="admin_update_comment">
-        <form action="/blog_aux_quatre_coins/controllers/commentController.php" method="post" class="form_admin_update_comment" enctype="multipart/form-data">
+        <form action="/controllers/commentController.php" method="post" class="form_admin_update_comment" enctype="multipart/form-data">
             <input type="hidden" name="comment_id" value="<?php echo $commentId; ?>">
             <h2>Modifier le commentaire</h2>
                 <div class="input-form-container">

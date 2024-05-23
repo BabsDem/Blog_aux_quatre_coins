@@ -18,7 +18,7 @@
     </div>
 
     <div class="admin_update_article">
-        <form action="/blog_aux_quatre_coins/controllers/articleController.php" method="post" class="form_admin_update_article" enctype="multipart/form-data">
+        <form action="/controllers/articleController.php" method="post" class="form_admin_update_article" enctype="multipart/form-data">
             <h2>Modifier l'article</h2>
                 <input type="hidden" name="update_article_id" value="<?php echo $articleId; ?>">
                 <div class="input-form-container">
