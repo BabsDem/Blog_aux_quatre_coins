@@ -35,7 +35,7 @@
                     <tr>
                         <td data-cell="Id"><?php echo $article["id_article"] ?></td>
                         <td data-cell="Nom"><?php echo $article["title"] ?></td>
-                        <td data-cell="Titre"><?php echo $article["subtitle"] ?></td>
+                        <td class="title_content_admin" data-cell="Titre"><?php echo $article["subtitle"] ?></td>
                         <td data-cell="Lieu"><?php echo $article["place"] ?></td>
                         <td data-cell="Description" class="description_content_admin"><?php echo $article["description"] ?></td>
                         <td data-cell="Catégorie"><?php echo $article["category"] ?></td>

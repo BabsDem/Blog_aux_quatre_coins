@@ -780,6 +780,7 @@ header {
   padding: 64px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 .section-account-container h1 {
   margin: 0 0 64px 0;
@@ -882,6 +883,11 @@ table tbody tr:nth-child(even) {
 table tbody tr:nth-child(odd) {
   background: white;
 }
+.icons_container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
 .icons_container button {
   background-color: transparent;
   border: 0;
@@ -911,7 +917,14 @@ table tbody tr:nth-child(odd) {
   width: 50%;
 }
 /****************** Admin article ******************/
-
+/* .title_content_admin {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+/* padding-bottom: 3px; */
+/* } */
 /****************** Admin create article ******************/
 .section_admin_users,
 .section_admin_create_user,
@@ -1199,6 +1212,9 @@ footer p {
   }
   .section-account-modify {
     margin: 0;
+  }
+  .icons_container {
+    justify-content: start;
   }
 }
 @media screen and (max-width: 500px) {
