@@ -1,17 +1,18 @@
 <?php 
   include "components/header.php";
-  if(isset($_GET['user_id'])){
-    $userId = $_GET['user_id'];
-    var_dump($userId);
-  }
-  if(isset($_SESSION['errors'])){
-    $errors = $_SESSION['errors']; 
-    var_dump($errors);
-    unset($_SESSION['errors']);   
-  }
-
-
-
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 1 ){
+      session_destroy();
+      header("Location: signin.php");
+  } 
+    if(isset($_GET['user_id'])){
+      $userId = $_GET['user_id'];
+      var_dump($userId);
+    }
+    if(isset($_SESSION['errors'])){
+      $errors = $_SESSION['errors']; 
+      var_dump($errors);
+      unset($_SESSION['errors']);   
+    }
 ?>
 
 <section class="section_admin_update_user">

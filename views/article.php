@@ -63,7 +63,7 @@
                 <input type="submit" name="submit_create_comment" value="Poster" class="btn">
             </form>
             <?php else : ?>
-                <p>Si vous souhaitez laisser un commentaire, <a class="btn" href="signin.php">Inscrivez vous</a> ou <a class="btn" href="signup.php">Connectez vous </a></p>
+                <p>Si vous souhaitez laisser un commentaire, <a class="btn" href="signup.php">Inscrivez vous</a> ou <a class="btn" href="signin.php">Connectez vous </a></p>
             <?php endif ?>
         </div>
     </section>

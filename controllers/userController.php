@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../models/userModel.php";
+include "../models/articleModel.php";
 include "../models/functions/validateSignup.php";
 include "../models/functions/validateImg.php";
 
@@ -20,6 +21,9 @@ if(isset($_POST['submit_inscription'])){
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 addUser($lastname, $firstname, $email , $password);
                 $_SESSION['user'] = getUser($email); 
+                $_SESSION['articles_villa'] = getAllType("villa");
+                $_SESSION['articles_hotel'] = getAllType("hotel");
+                $_SESSION['images'] = getAllImg();
             }catch(\Exception $e){
                 $_SESSION['errors']['email'] = $e->getMessage();
                 header("Location: ../views/signup.php");
@@ -46,6 +50,9 @@ if(isset($_POST['submit_inscription'])){
             $user = getUser($email);
             if (password_verify($password, $user['password'])) {                    
                 $_SESSION['user'] = $user;
+                $_SESSION['articles_villa'] = getAllType("villa");
+                $_SESSION['articles_hotel'] = getAllType("hotel");
+                $_SESSION['images'] = getAllImg();
                 header("Location: ../views/home.php?page=home");
                 exit;
             } else {
@@ -71,13 +78,13 @@ if(isset($_POST['submit_inscription'])){
         $email = htmlspecialchars(trim(strtolower($_POST['email'])));
         $file = $_FILES['profile_img'];   
         $user = $_SESSION['user']; 
-        try{                    
+        try{
+            //A modifier validate img                   
             $filename = validateImg($file, $user['id_user'], "profile", $index = 0); 
             $_SESSION['user'] = updateUser($user["id_user"], $lastname, $firstname, $email, $filename);
             $_SESSION["errors"] = validateSignup($lastname,$firstname, $email, null,null);
             header("Location: ../views/account.php");
             exit;
-       
         }catch(\Exception $e){
             $_SESSION['errors']['img'] = $e->getMessage();
             header("Location: ../views/account_modify.php"); 
@@ -100,7 +107,6 @@ if(isset($_POST['submit_inscription'])){
                     $message = "Votre mot de passe a été mis à jour !";
                     header("Location: ../views/account.php?message=$message"); 
                     exit;
-
                 }catch(\Exception $e){
                     $_SESSION['errors']['password'] = $e->getMessage();
                     header("Location: ../views/account_modify_password.php"); 
@@ -114,7 +120,6 @@ if(isset($_POST['submit_inscription'])){
             $message = "Votre ancien mot de passe est incorrect"; 
             header("Location: ../views/account_modify_password.php?message=$message"); 
         }
-
     }
 }else if(isset($_POST['submit_admin_create_user'])){
     if(!empty($_POST['last_name']) && !empty($_POST['first_name']) &&  !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])){

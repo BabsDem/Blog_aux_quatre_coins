@@ -748,8 +748,12 @@ header {
 .display__user-comment-container {
   background-color: var(--transparentBlue);
   padding: 64px;
+  gap: 32px;
   display: flex;
   flex-direction: column;
+}
+.user-comment-container p:first-of-type {
+  text-transform: capitalize;
 }
 .img-user-container {
   width: 200px;
@@ -791,7 +795,6 @@ header {
   background: white;
   max-width: 600px;
   width: 100%;
-  min-width: 260px;
   margin-inline: auto;
   padding: 32px;
   border-radius: 8px;
@@ -820,6 +823,9 @@ header {
   letter-spacing: 0.5px;
   border: 0;
   margin: 64px auto 0 auto;
+}
+.account-data {
+  text-transform: capitalize;
 }
 /* Modifier mes infos */
 input[type="file"] {
@@ -1155,6 +1161,10 @@ footer p {
   .admin_menu li:first-of-type {
     margin: 32px 0;
   }
+  .user-comment-container {
+    width: 100%;
+    text-align: center;
+  }
 }
 @media screen and (max-width: 700px) {
   .menu {
@@ -1270,6 +1280,12 @@ footer p {
   .account-modify {
     padding: 16px;
   }
+  .img-user-container {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    min-height: 100px;
+  }
 }
 @media screen and (max-width: 400px) {
   .intro,
@@ -1279,12 +1295,7 @@ footer p {
   .description-content {
     padding: 0 32px;
   }
-  .img-user-container {
-    width: 100px;
-    min-width: 100px;
-    height: 100px;
-    min-height: 100px;
-  }
+
   .form-inscription {
     padding: 16px 16px;
     min-width: 280px;
@@ -1314,7 +1325,9 @@ footer p {
   .form-connexion {
     padding: 32px 16px;
   }
-  .account-modify-btn {
+  .account-modify-btn,
+  .account-btn,
+  .btn-file {
     text-align: center;
   }
   .account-content,

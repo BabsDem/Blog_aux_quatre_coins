@@ -5,6 +5,10 @@
     unset($_SESSION['errors']);            
 
   }
+  if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 1 ){
+    session_destroy();
+    header("Location: signin.php");
+} 
 ?>
 
 <section class="section_admin_create_user">

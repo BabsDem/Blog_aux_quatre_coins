@@ -1,12 +1,16 @@
 <?php include "components/header.php";
-if(isset($_GET['article_id'])){
-  $articleId = $_GET['article_id'];
-}
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-    unset($_SESSION['errors']);   
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 1 ){
+        session_destroy();
+        header("Location: signin.php");
+    } 
+    if(isset($_GET['article_id'])){
+    $articleId = $_GET['article_id'];
+    }
+    if(isset($_SESSION["errors"])){
+        $errors = $_SESSION["errors"];
+        unset($_SESSION['errors']);   
 
-}
+    }
 ?>
 <section class="section_admin_update_article">
     <div class="admin_menu">

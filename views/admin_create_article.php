@@ -1,5 +1,9 @@
 <?php 
 include "components/header.php";
+if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 1 ){
+    session_destroy();
+    header("Location: signin.php");
+} 
 if(isset($_SESSION['errors'])){
    $errors =$_SESSION['errors'];
     unset($_SESSION['errors']);

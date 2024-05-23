@@ -1,13 +1,17 @@
 <?php include "components/header.php";
-if(isset($_GET['comment_id'])){
-$commentId = $_GET['comment_id'];
-var_dump($commentId);
-}
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-    unset($_SESSION['errors']);   
+    if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 1 ){
+        session_destroy();
+        header("Location: signin.php");
+    } 
+    if(isset($_GET['comment_id'])){
+    $commentId = $_GET['comment_id'];
+    var_dump($commentId);
+    }
+    if(isset($_SESSION["errors"])){
+        $errors = $_SESSION["errors"];
+        unset($_SESSION['errors']);   
 
-}
+    }
 ?>
 <section class="section_admin_update_comment">
     <div class="admin_menu">

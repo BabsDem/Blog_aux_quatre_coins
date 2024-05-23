@@ -12,9 +12,7 @@ if(isset($_SESSION['errors'])){
 if(isset($_GET['message'])){
     $message = $_GET['message'];
 }
-// ON change img pour message img sélectionnée
-// Remplacer l'img precedente par la nouvelle 
-// Appliquer la fonction de validation
+
 ?>
 
 <section class="section-account-modify ">    

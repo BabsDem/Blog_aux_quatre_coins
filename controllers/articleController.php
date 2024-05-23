@@ -12,25 +12,30 @@ if(isset($_POST['submit_admin_create_article'])){
         $category = htmlspecialchars(trim($_POST['categories']));
         $files = $_FILES['images']; 
         try{
-            $articleId = createArticle($title, $subtitle, $place, $description, $category); 
             $uploadedFiles = [];
             for($i= 0; $i < count($files['name']); $i++){
                 $file = [
                 'name' => $files['name'][$i],
-                'type' => $files['type'][$i],
-                'tmp_name' => $files['tmp_name'][$i],
+                'size' => $files['size'][$i],
                 'error' => $files['error'][$i],
-                'size' => $files['size'][$i]
                 ];
                 $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
-
                 $_SESSION['errors'] = validateImg($file, $fileExtension);
-
-                if(empty($_SESSION["errors"])){                
+            }
+            if(empty($_SESSION["errors"])){             
+                $articleId = createArticle($title, $subtitle, $place, $description, $category); 
+                for($i= 0; $i < count($files['name']); $i++){
+                    $file = [
+                    'name' => $files['name'][$i],
+                    'type' => $files['type'][$i],
+                    'tmp_name' => $files['tmp_name'][$i],
+                    'size' => $files['size'][$i]
+                    ];
+                    $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
                     $filename = pathImg($articleId, $fileExtension,"article", $file, $i);
                     $uploadedFiles[] = $filename;
                     $articleImg = createArticleImg($filename, $articleId);
-                }
+                    }
             }
             $_SESSION['articles'] = getAllArticle();
         }catch(\Exception $e){
@@ -89,7 +94,7 @@ if(isset($_POST['submit_admin_create_article'])){
 if(isset($_GET['page']) && $_GET['page'] === "home"){
     $_SESSION['articles_villa'] = getAllType("villa");
     $_SESSION['articles_hotel'] = getAllType("hotel");
-    $_SESSIOn['images'] = getAllImg();
+    $_SESSION['images'] = getAllImg();
     header("Location: ../views/home.php?page=home"); 
     exit;
 }

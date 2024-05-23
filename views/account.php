@@ -18,11 +18,11 @@ if(isset($_GET['message'])){
         <div class="img-account-container">
             <img src="<?php echo $user['img']; ?>" alt="">
         </div>
-        <div>
+        <div class="account-data">
             <p>Nom :</p>
             <p><?php echo $user["lastname"] ?></p>
         </div>
-        <div>
+        <div class="account-data">
             <p>Prénom :</p>
             <p><?php echo $user["firstname"] ?></p>
         </div>
