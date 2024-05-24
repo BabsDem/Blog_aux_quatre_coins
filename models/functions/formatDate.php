@@ -1,5 +1,5 @@
 <?php
-
+// Reformatage de la date pour l'avoir dans le format :  23 mai 2024 à 14:30
 function formatDateFr($date) {
     $days = [
         'Sunday' => 'dimanche', 

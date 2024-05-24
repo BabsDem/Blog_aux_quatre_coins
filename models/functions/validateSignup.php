@@ -1,4 +1,6 @@
 <?php
+
+// Vérification des formulaires concernant les utilisateurs
 function validateSignup ($lastname = null, $firstname = null, $email = null, $password = null, $confirm_password = null){
     $errors = [];
 

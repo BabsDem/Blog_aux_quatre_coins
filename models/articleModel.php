@@ -48,13 +48,11 @@
         $req->bindParam(":id",$id);
         $req->execute();
     }
-
     function deleteImgArticle($articleId){
         global $bdd; 
         $req = $bdd->prepare("DELETE FROM relation_articles_images WHERE id_article = :id"); 
         $req->bindParam(":id", $articleId);
         $req->execute(); 
-
         //Supprime tous les enregistrements de la table images où id_img n'est pas présent dans le sous-ensemble de id_img sélectionné dans la table relation_articles_images.
         $req = $bdd->prepare("DELETE FROM images WHERE id_img NOT IN (SELECT id_img FROM relation_articles_images)"); 
         $req->execute(); 

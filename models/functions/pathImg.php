@@ -1,5 +1,5 @@
 <?php
-
+// Téléchargement de l'image dans le dossier public qui contient le dossier article et profil
 function pathImg($id, $extension, $directory, $file, $index = null){
     date_default_timezone_set('Europe/Paris');
     $date = date("Hi");

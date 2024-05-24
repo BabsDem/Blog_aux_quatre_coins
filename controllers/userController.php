@@ -6,8 +6,6 @@ include "../models/functions/validateSignup.php";
 include "../models/functions/validateImg.php";
 include_once "../models/functions/pathImg.php";
 
-
-
 if(isset($_POST['submit_inscription'])){
     if(!empty($_POST['last_name']) && !empty($_POST['first_name']) &&  !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])){
         $lastname = htmlspecialchars(trim(strtolower($_POST['last_name']))); 
@@ -16,6 +14,7 @@ if(isset($_POST['submit_inscription'])){
         $password = htmlspecialchars(trim($_POST['password']));
         $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
 
+        //Stockage des erreurs en session pour rediriger l'utilisateur sur le formulaire s'il y en a 
         $_SESSION['errors'] = validateSignup($lastname, $firstname, $email, $password, $confirm_password);
 
         if(empty( $_SESSION['errors'])){
@@ -23,8 +22,10 @@ if(isset($_POST['submit_inscription'])){
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 addUser($lastname, $firstname, $email , $password);
                 $_SESSION['user'] = getUser($email); 
+                // Stockage des articles par catégorie
                 $_SESSION['articles_villa'] = getAllType("villa");
                 $_SESSION['articles_hotel'] = getAllType("hotel");
+                // Récupération de toutes les images d'articles
                 $_SESSION['images'] = getAllImg();
             }catch(\Exception $e){
                 $_SESSION['errors']['email'] = $e->getMessage();
@@ -83,6 +84,7 @@ if(isset($_POST['submit_inscription'])){
         try{
             $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
             $_SESSION['errors'] = validateImg($file, $fileExtension); 
+            // Récupération du chemin de l'image pour l'insérer en BDD
             $filename = pathImg($user['id_user'], $fileExtension, "profile", $file, null) ;
             $_SESSION['user'] = updateUser($user["id_user"], $lastname, $firstname, $email, $filename);
             $_SESSION["errors"] = validateSignup($lastname,$firstname, $email, null,null);
@@ -191,6 +193,7 @@ if(isset($_POST['submit_inscription'])){
             $user = getUser($email); 
             $_SESSION['errors'] = validateSignup (null, null, $email,null, null);
             if(empty($_SESSION['errors'])) {
+                // On vérifie si le mail existe déjà en BDD
                 if(checkUserExists($email)){
                     if($token === $user['token']){
                         $token = password_hash($token, PASSWORD_DEFAULT);
@@ -218,17 +221,20 @@ if(isset($_POST['submit_inscription'])){
     }
 }
 
+// Récupération de tous les utilisateurs si le paramètre page=admin_user existe
 if(isset($_GET['page']) && $_GET['page'] === "admin_users"){
     $_SESSION['users'] = getAllUser();
     header("Location: ../views/admin_users.php?page=admin_users"); 
     exit;
 }
+// Permet a l'utilisateur de supprimer son compte celui-ci est renvoyé sur home en tant que visiteur
 if(isset($_GET['page']) && $_GET['page'] === "delete_account" && $_GET['id']){
     deleteUser($_GET['id']); 
     unset($_SESSION['user']);
     header("Location: ../views/home.php?page=home"); 
     exit;
 }
+// Permet à l'admin de supprimer un utilisateur
 if(isset($_GET['user_id'])){
     deleteUser($_GET['user_id']); 
     $_SESSION["users"] = getAllUser(); 

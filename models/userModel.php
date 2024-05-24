@@ -47,7 +47,6 @@ function login($email){
     }
     return $user;
 }
-
 function getUser($email){
     global $bdd; 
     $req = $bdd->prepare("SELECT * FROM users WHERE email = :email"); 
@@ -56,7 +55,6 @@ function getUser($email){
     $user = $req->fetch();         
     return $user;
 }
-
 function getUserForUpdate($id){
     global $bdd; 
     $req = $bdd->prepare("SELECT * FROM users WHERE id_user = :id"); 
@@ -65,8 +63,6 @@ function getUserForUpdate($id){
     $user = $req->fetch();         
     return $user;
 }
-
-
 function getAllUser(){
     global $bdd;
     $req = $bdd->prepare("SELECT * FROM users"); 
@@ -74,7 +70,6 @@ function getAllUser(){
     $users =$req->fetchAll();
     return $users;
 }
-
 function updateUser($id, $lastname, $firstname, $email, $img){
     global $bdd;
     $req = $bdd->prepare("UPDATE users SET lastname= :lastname, firstname= :firstname, email= :email, img= :img WHERE id_user = :id");
@@ -86,7 +81,6 @@ function updateUser($id, $lastname, $firstname, $email, $img){
     $req->execute();
     return getUser($email); 
 }
-
 function updateUserPassword($id, $password){
     global $bdd; 
     $req = $bdd->prepare("UPDATE users SET password= :password WHERE id_user= :id"); 
@@ -94,14 +88,12 @@ function updateUserPassword($id, $password){
     $req->bindParam(":id", $id); 
     $req->execute(); 
 }
-
 function deleteUser($id){
     global $bdd;
     $req= $bdd->prepare("DELETE FROM users WHERE id_user= :id"); 
     $req->bindParam(":id", $id); 
     $req->execute(); 
 }
-
 function resetPassword($id, $token){
     global $bdd; 
     $req = $bdd->prepare('UPDATE users SET password= :password WHERE id_user= :id');

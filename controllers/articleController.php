@@ -14,6 +14,7 @@ if(isset($_POST['submit_admin_create_article'])){
         try{
             $uploadedFiles = [];
             for($i= 0; $i < count($files['name']); $i++){
+                // On récupère chaque image 
                 $file = [
                 'name' => $files['name'][$i],
                 'size' => $files['size'][$i],
@@ -57,6 +58,7 @@ if(isset($_POST['submit_admin_create_article'])){
         $id = htmlspecialchars(trim($_POST['update_article_id']));  
         $files = $_FILES['images'];
         try{
+            // On supprime toutes les images dans le but de réinsérer les nouvelles images par la suite
             deleteImgArticle($id);        
             $uploadedFiles = [];
             for($i= 0; $i < count($files['name']); $i++){
@@ -70,6 +72,7 @@ if(isset($_POST['submit_admin_create_article'])){
                 $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
                 $_SESSION['errors'] = validateImg($file, $fileExtension);
 
+                // S'il n'y a pas d'erreurs, on récupère le chemin des différentes images et on les insère en BDD
                 if(empty($_SESSION["errors"])){                
                     $filename = pathImg($articleId, $fileExtension,"article", $file, $i);
                     $uploadedFiles[] = $filename;
@@ -90,7 +93,7 @@ if(isset($_POST['submit_admin_create_article'])){
         
     }
 }
-//READ ARTICLE
+//Récupération des articles pour la page d'accueil
 if(isset($_GET['page']) && $_GET['page'] === "home"){
     $_SESSION['articles_villa'] = getAllType("villa");
     $_SESSION['articles_hotel'] = getAllType("hotel");
@@ -98,30 +101,34 @@ if(isset($_GET['page']) && $_GET['page'] === "home"){
     header("Location: ../views/home.php?page=home"); 
     exit;
 }
+// Récupération de tous les article pour l'admin
 if(isset($_GET['page']) && $_GET['page'] === "admin_articles"){
     $_SESSION['articles'] = getAllArticle();
     header("Location: ../views/admin_articles.php?page=admin_articles"); 
     exit;
 }
+//Récupération des articles pour la page blog (toutes catégories)
 if(isset($_GET['page']) && $_GET['page'] === "blog"){
     $_SESSION['images'] = getAllImg(); 
     $_SESSION['articles'] = getAllArticle();   
     header("Location: ../views/blog?page=blog"); 
     exit;
 }
+// Récupération des articles pour la catégorie villa
 if(isset($_GET['page']) && $_GET['page'] === "blog_villa"){
     $_SESSION['images'] = getAllImg(); 
     $_SESSION['articles'] = getAllType("villa");
     header("Location: ../views/blog?page=blog_villa"); 
     exit;
 }
+// Récupération des articles pour la catégorie hotel
 if(isset($_GET['page']) && $_GET['page'] === "blog_hotel"){
     $_SESSION['images'] = getAllImg(); 
     $_SESSION['articles'] = getAllType("hotel");
     header("Location: ../views/blog?page=blog_hotel"); 
     exit;
 }
-// DELETE ARTICLE
+// Supprimer un article sur l'espace admin
 if(isset($_GET['article_id'])){
     deleteArticle($_GET['article_id']); 
     $_SESSION['articles'] = getAllArticle();

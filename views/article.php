@@ -68,6 +68,7 @@
         </div>
     </section>
 
+    <?php if(!empty($comments)): ?>
     <section class="display__user-comment-container">
         <?php foreach($comments as $comment) : ?>
         <div class="user-comment-card">
@@ -84,6 +85,7 @@
             </div>
         </div>
         <?php endforeach ?>
+        <?php endif ?>
 
     </section>
 </main>
