@@ -220,7 +220,6 @@ if(isset($_POST['submit_inscription'])){
         }
     }
 }
-
 // Récupération de tous les utilisateurs si le paramètre page=admin_user existe
 if(isset($_GET['page']) && $_GET['page'] === "admin_users"){
     $_SESSION['users'] = getAllUser();

@@ -20,7 +20,9 @@ if(isset($_POST['submit_admin_create_article'])){
                 'size' => $files['size'][$i],
                 'error' => $files['error'][$i],
                 ];
+                // On récupère l'extension de chaque image
                 $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
+                // On vérifie s'il s'agit du bon format, de la bonne taille et qu'il n'y ait pas d'erreur
                 $_SESSION['errors'] = validateImg($file, $fileExtension);
             }
             if(empty($_SESSION["errors"])){             
@@ -33,6 +35,7 @@ if(isset($_POST['submit_admin_create_article'])){
                     'size' => $files['size'][$i]
                     ];
                     $fileExtension = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
+                    //On upload les images dans le répertoire article
                     $filename = pathImg($articleId, $fileExtension,"article", $file, $i);
                     $uploadedFiles[] = $filename;
                     $articleImg = createArticleImg($filename, $articleId);

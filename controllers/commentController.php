@@ -4,7 +4,6 @@ include "../models/commentModel.php";
 include "../models/userModel.php";
 include "../models/articleModel.php";
 
-
 if(isset($_POST["submit_create_comment"])){
     if(!empty($_POST["user_comment"])){
         $comment = htmlspecialchars(trim($_POST["user_comment"])); 
